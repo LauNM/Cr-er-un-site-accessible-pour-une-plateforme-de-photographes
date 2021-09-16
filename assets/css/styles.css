@@ -1,0 +1,116 @@
+:root {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* GENERAL */
+ul {
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+h1 {
+    font-size: 36px;
+    line-height: 47px;
+    /* identical to box height */
+
+
+    color: #911C1C;
+}
+
+/*HEADER*/
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 65px;
+}
+.tag {
+    display: inline;
+    border: 0.5px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 11px;
+
+    
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #911C1C;
+    padding: 0 0.4rem;
+    margin: 0.2rem;
+}
+
+
+/*MAIN*/
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+        /*CARD*/
+.photographer-description {
+    width: calc(100%/3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h2 {
+    font-size: 36px;
+    line-height: 47px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #D3573C;
+}
+h3 {
+    font-size: 13px;
+    line-height: 17px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #901C1C;
+}
+.id-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+.description {
+    font-size: 10px;
+    line-height: 13px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.price {
+    font-size: 9px;
+    line-height: 12px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #757575;
+}
