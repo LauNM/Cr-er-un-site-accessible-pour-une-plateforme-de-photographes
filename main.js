@@ -1,6 +1,6 @@
 // FUNCTIONS
-const createArticle = (portrait, name, city, country, tagline, price, tags) => {
-  return  ` <article class="photographer-description">
+const createArticle = (portrait, name, city, country, tagline, price, tagList) => {
+    return ` <article class="photographer-description">
     <section class="card-header">
         <img src="assets/img/Photographers/${portrait}" alt="ID photo" class="id-photo">
         <h2>${name}</h2>
@@ -12,15 +12,7 @@ const createArticle = (portrait, name, city, country, tagline, price, tags) => {
     </section>
     <section>
         <ul>
-            <li class="tag">
-                <a href="#">#${tags[0]}</a>
-            </li>
-            <li class="tag">
-                <a href="#">#${tags[1]}</a>
-            </li>
-            <li class="tag">
-                <a href="#">#${tags[2]}</a>
-            </li>
+            ${tagList}
         </ul>
     </section>
     </article>
@@ -28,12 +20,15 @@ const createArticle = (portrait, name, city, country, tagline, price, tags) => {
 }
 
 const createTagList = (tags) => {
+    let list = '';
     tags.forEach(tag => {
-        console.log( `<li class="tag">
+        list += `<li class="tag">
             <a href="#">#${tag}</a>
-        </li>`)
+        </li>`
     })
+    return list;
 }
+
 
 // THEN
 const cardsSection = document.getElementById("cards");
@@ -44,13 +39,13 @@ function createCard() {
         return response.json();
     }).then(data => {
         data.photographers.forEach(e => {
-            //console.log(createTagList(e.tags));
-             cardsSection.insertAdjacentHTML('afterbegin', createArticle(e.portrait, e.name, e.city, e.country, e.tagline, e.price, e.tags));
-       });
+            cardsSection.insertAdjacentHTML('afterbegin', createArticle(e.portrait, e.name, e.city, e.country, e.tagline, e.price, createTagList(e.tags)));
+        });
 
     }).catch(err => {
         console.log(err);
     });
 
 }
+
 createCard();

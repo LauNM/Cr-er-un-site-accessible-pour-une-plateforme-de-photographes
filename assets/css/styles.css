@@ -1,5 +1,5 @@
 :root {
-    font-family: DM Sans;
+    font-family: DM Sans, serif;
     font-style: normal;
     font-weight: normal;
 }
@@ -19,18 +19,32 @@ h1 {
     font-size: 36px;
     line-height: 47px;
     /* identical to box height */
-
-
     color: #911C1C;
+}
+h2 {
+    font-size: 36px;
+    line-height: 47px;
+    /* identical to box height */
+    text-align: center;
+    color: #D3573C;
+}
+h3 {
+    font-size: 13px;
+    line-height: 17px;
+    /* identical to box height */
+    text-align: center;
+    color: #901C1C;
 }
 
 /*HEADER*/
-
 header {
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin-bottom: 65px;
+}
+.logo {
+    width: 18rem;
 }
 .tag {
     display: inline;
@@ -38,7 +52,6 @@ header {
     box-sizing: border-box;
     border-radius: 11px;
 
-    
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
@@ -69,24 +82,6 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-h2 {
-    font-size: 36px;
-    line-height: 47px;
-    /* identical to box height */
-
-    text-align: center;
-
-    color: #D3573C;
-}
-h3 {
-    font-size: 13px;
-    line-height: 17px;
-    /* identical to box height */
-
-    text-align: center;
-
-    color: #901C1C;
 }
 .id-photo {
     width: 200px;
