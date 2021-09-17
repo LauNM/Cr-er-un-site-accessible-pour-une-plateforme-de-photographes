@@ -38,13 +38,14 @@ h3 {
 
 /*HEADER*/
 header {
+    height: 96px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 65px;
 }
 .logo {
-    width: 18rem;
+    max-width: 18rem;
 }
 .tag {
     display: inline;
@@ -63,8 +64,27 @@ header {
     padding: 0 0.4rem;
     margin: 0.2rem;
 }
+.responsive-nav {
+    display: none;
+}
 
-
+@media screen and (max-width: 1250px) {
+    .responsive-nav {
+        display: flex;
+        justify-content: center;
+    }
+    .tags {
+        display: none;
+    }
+}
+@media screen and (max-width: 700px) {
+    h1 {
+        font-size: 14px;
+    }
+    .logo {
+        width: 40%;
+    }
+}
 /*MAIN*/
 #cards {
     display: flex;
