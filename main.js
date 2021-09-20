@@ -5,12 +5,12 @@ const createArticle = (portrait, name, city, country, tagline, price, tagList) =
         <img src="assets/img/Photographers/${portrait}" alt="ID photo" class="id-photo">
         <h2>${name}</h2>
     </section>
-    <section>
+    <section class="card-main">
         <h3>${city}, ${country}</h3>
         <p class="description">${tagline}</p>
         <p class="price">${price} €/jour</p>
     </section>
-    <section>
+    <section class="card-tags">
         <ul>
             ${tagList}
         </ul>
