@@ -52,10 +52,13 @@ h3 {
 
 /*HEADER*/
 header {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
     height: 96px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .logo {
@@ -105,7 +108,7 @@ header {
     }
 }
 
-/*MAIN*/
+/*MAIN PAGE*/
 #cards {
     display: flex;
     flex-wrap: wrap;
@@ -168,4 +171,25 @@ header {
         width: 100%;
         margin-top: 1rem;
     }
+}
+
+/*ARTIST PAGE*/
+.artist-header {
+    background: #FAFAFA;
+    border-radius: 5px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.artist-header section h2, h3, .description, .card-tags {
+    text-align: left;
+}
+.align-left {
+    justify-content: left;
+}
+
+.btn {
+    height: 2rem;
 }
