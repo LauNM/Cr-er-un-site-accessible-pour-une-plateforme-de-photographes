@@ -100,4 +100,3 @@ fetch('assets/data.json').then(response => {
 }).catch(err => {
     console.log(err);
 });
-

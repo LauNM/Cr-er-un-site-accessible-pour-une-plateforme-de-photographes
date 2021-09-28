@@ -184,7 +184,7 @@ header {
 }
 
 .artist-header section h2, h3, .description, .card-tags {
-    text-align: left;
+    text-align: center;
 }
 .align-left {
     justify-content: left;
