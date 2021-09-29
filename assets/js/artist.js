@@ -1,27 +1,27 @@
 
 class Artist {
     constructor(portrait, name, city, country, tagline, price, tags) {
-        this.portrait = portrait;
-        this.name = name;
-        this.city = city;
-        this.country = country;
-        this.tagline = tagline;
-        this.price = price;
-        this.tags = tags;
+        this._portrait = portrait;
+        this._name = name;
+        this._city = city;
+        this._country = country;
+        this._tagline = tagline;
+        this._price = price;
+        this._tags = tags;
 
 
         this.createArticleArtist = () => {
             return ` <article class="photographer-description">
-                        <a id="${this.name}">
+                        <a id="${this._name}">
                             <section class="card-header">
-                                <img src="assets/img/Photographers/${this.portrait}" alt="ID photo" class="id-photo">
-                                <h2>${this.name}</h2>
+                                <img src="assets/img/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
+                                <h2>${this._name}</h2>
                             </section>
                         </a>
                         <section class="card-main">
-                            <h3>${this.city}, ${this.country}</h3>
-                            <p class="description">${this.tagline}</p>
-                            <p class="price">${this.price} €/jour</p>
+                            <h3>${this._city}, ${this._country}</h3>
+                            <p class="description">${this._tagline}</p>
+                            <p class="price">${this._price} €/jour</p>
                         </section>
                         <section class="card-tags">
                             <ul>
@@ -33,7 +33,7 @@ class Artist {
 
         this.addTagsArtist = () => {
             let list = '';
-            this.tags.forEach(tag => {
+            this._tags.forEach(tag => {
                 list += `<li class="tag">
                             <a href="#">#${tag}</a>
                         </li>`
@@ -45,7 +45,7 @@ class Artist {
             return ` <div>
                         <div class="artist-header">
                             <section>
-                                <h2>${this.name}</h2>
+                                <h2>${this._name}</h2>
 
                                     <section class="card-tags">
                                         <ul>
@@ -74,68 +74,16 @@ class Artist {
     }
 }
 
-/*
-// FUNCTIONS
-/!*const createArticle = (portrait, name, city, country, tagline, price, tags) => {
-    return ` <article class="photographer-description">
-        <a id="${name}" onclick="displayArtistPage('${name}')">
-            <section class="card-header">
-                <img src="assets/img/Photographers/${portrait}" alt="ID photo" class="id-photo">
-                <h2>${name}</h2>
-            </section>
-        </a>
-        <section class="card-main">
-            <h3>${city}, ${country}</h3>
-            <p class="description">${tagline}</p>
-            <p class="price">${price} €/jour</p>
-        </section>
-        <section class="card-tags">
-            <ul>
-                ${tags}
-            </ul>
-        </section>
-    </article>
-    `
-}*!/
 
-//Create taglist for 1 photographer
-const addTagsNav = (tags) => {
-    let list = '';
-    tags.forEach(tag => {
-        list += `<li class="tag">
-            <a href="#">#${tag}</a>
-        </li>`
-    })
-    return list;
-}
 
-//Create taglist from all tags in data
-const tagsList = (data) => {
-    let tagsTab = [];
-    data.forEach(el => {
-        el.tags.forEach(tag => {
-            if (!tagsTab.includes(tag)) {
-                tagsTab.push(tag)
-            }
-        })
-    })
-    return tagsTab;
-}
-
-/!*function createCard(data) {
-    data.forEach(e => {
-        cardsSection.insertAdjacentHTML('afterbegin', createArticle(e.portrait, e.name, e.city, e.country, e.tagline, e.price, addTags(e.tags)));
-    });
-}*!/
 function createCard(data) {
     data.forEach(e => {
-        const artist = new Artist();
+        const artist = new Artist(e.portrait, e.name, e.city, e.country, e.tagline, e.price, e.tags);
         cardsSection.insertAdjacentHTML('afterbegin', artist.createArticleArtist());
     });
 }
 
 const displayArtistPage = (artist) => {
-    console.log(`you clicked on artist named ${artist}`);
     window.location.assign(`/artist.html`);
     console.log(`you clicked on artist named ${artist}`);
 }
@@ -160,4 +108,4 @@ fetch('assets/data.json').then(response => {
 });
 
 
-*/
+
