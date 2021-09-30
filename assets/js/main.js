@@ -32,6 +32,7 @@ function createCard(data) {
 // THEN
 const cardsSection = document.getElementById("cards");
 const navTags = document.getElementById("nav-tags");
+const responsiveNavTags = document.getElementById("responsive-nav-tags");
 
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
@@ -43,6 +44,7 @@ fetch('/assets/data.json').then(response => {
     data.photographers.forEach((e) => {infos.push(e); } )
     createCard(infos);
     navTags.insertAdjacentHTML('afterbegin', addTagsNav(tagsList(infos)));
+    responsiveNavTags.insertAdjacentHTML('afterbegin', addTagsNav(tagsList(infos)));
 
 }).catch(err => {
     console.log(err);
