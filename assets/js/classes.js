@@ -42,34 +42,45 @@ export class Artist {
         }
 
         this.artistPage = () => {
-            return ` <div>
+            return `<!-- <div>-->
                         <div class="artist-header">
-                            <section>
-                                <h2>${this._name}</h2>
-
-                                    <section class="card-tags">
-                                        <ul>
-
+                            <div class="artist-presentation">
+                                <section class="artist-infos">
+                                    <h1>${this._name}</h1>
+                                    <section class="artist-main">
+                                        <p class="localisation">${this._city}, ${this._country}</p>
+                                        <p class="description">${this._tagline}</p>
+                                    </section>
+                                    <section class="tags">
+                                       <ul>
+                                            ${this.addTagsArtist()}
                                         </ul>
                                     </section>
-                            </section>
-                            <button>Contactez-moi</button>
-
+                                </section>
+                                <section class="button">
+                                    <button class="contact-btn">Contactez-moi</button>
+                                </section>
+                            </div>
+                            <img src="../img/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
                         </div>
-                        <section class="artist-main">
-                          <p>Trier par</p>
-                          <button>Popularité</button>
-                          <div class="artist-photos">
-                            <article class="card-photos">
-                                <img src="" alt="Photo" class="card-photo">
-                                <span>
-                                    <h2></h2>
-                                    <h2>12</h2>
-                                </span>
-                            </article>
-                          </div>
-                        </section>
-                    </div>`
+                        <!--<section class="artist-main">
+                            <label for="sort-by">Trier par :</label>
+                            <select name="sort" id="sort-by">
+                               <option class="select-item" value="popularity">Popularité</option>
+                               <option class="select-item" value="date">Date</option>
+                               <option class="select-item" value="title">Titre</option>
+                            </select>
+                            <div class="artist-photos">
+                                <article class="photos">
+                                    <img src="" alt="Photo" class="photo">
+                                    <span>
+                                        <h2></h2>
+                                        <h2></h2>
+                                    </span>
+                                </article>
+                            </div>
+                        </section>-->
+<!--                    </div>-->`
         }
     }
 }

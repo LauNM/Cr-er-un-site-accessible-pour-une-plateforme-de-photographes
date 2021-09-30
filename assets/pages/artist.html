@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="../css/artist.css"/>
+    <link rel="stylesheet" href="../css/variables.css"/>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap"
@@ -23,9 +25,61 @@
     <div id="artist">
 
     </div>
+    <section class="artist-main">
+        <label for="sort-by">Trier par :</label>
+        <select name="sort" id="sort-by">
+            <option class="select-item" value="popularity">Popularité</option>
+            <option class="select-item" value="date">Date</option>
+            <option class="select-item" value="title">Titre</option>
+        </select>
+        <div class="photos-section">
+            <article class="artist-photos">
+                <img src="../img/Ellie%20Rose%20Wilkens/Architecture_Connected_Curves.jpg" alt="Photo" class="photo">
+                <div class="photo-infos">
+                    <p class="photo-title">Arc-en-cie</p>
+                    <span class="likes">
+                        <p>1</p>
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </div>
+            </article>
+            <article class="artist-photos">
+                <img src="../img/Ellie%20Rose%20Wilkens/Architecture_Connected_Curves.jpg" alt="Photo" class="photo">
+                <div class="photo-infos">
+                    <p class="photo-title">Arc-en-cie</p>
+                    <span class="likes">
+                        <p>1</p>
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </div>
+            </article>
+            <article class="artist-photos">
+                <img src="../img/Ellie%20Rose%20Wilkens/Architecture_Connected_Curves.jpg" alt="Photo" class="photo">
+                <div class="photo-infos">
+                    <p class="photo-title">Arc-en-cie</p>
+                    <span class="likes">
+                        <p>1</p>
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </div>
+            </article>
+            <article class="artist-photos">
+                <img src="../img/Ellie%20Rose%20Wilkens/Architecture_Connected_Curves.jpg" alt="Photo" class="photo">
+                <div class="photo-infos">
+                    <p class="photo-title">Arc-en-cie</p>
+                    <span class="likes">
+                        <p>1</p>
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </div>
+            </article>
+
+        </div>
+    </section>
 </main>
 
 <script type="module" src="../js/artist.js"></script>
+<script src="https://kit.fontawesome.com/85f6025f98.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

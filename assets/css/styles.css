@@ -1,31 +1,27 @@
-:root {
-    font-family: DM Sans, serif;
-    font-style: normal;
-    font-weight: normal;
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* GENERAL */
-ul {
-    padding: 0;
+#cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    margin-top: 3rem;
+    justify-content: space-around;
 }
 
-li {
-    list-style-type: none;
-}
 
-a {
-    text-decoration: none;
-    color: inherit;
+.description {
+    font-size: 10px;
+    line-height: 13px;
 }
 
 h1 {
     font-size: 36px;
     line-height: 47px;
     /* identical to box height */
-    color: #911C1C;
+    color: var(--primary-dark);
     font-weight: 400;
 }
 
@@ -34,9 +30,9 @@ h2 {
     line-height: 47px;
     /* identical to box height */
     text-align: center;
-    color: #D3573C;
+    color: var(--primary-light);
     margin-bottom: 0;
-    margin-top: 1rem;
+    margin-top: 0;
     font-weight: 400;
 }
 
@@ -45,24 +41,48 @@ h3 {
     line-height: 17px;
     /* identical to box height */
     text-align: center;
-    color: #901C1C;
+    color: var(--primary-dark);
     margin: 0.5rem;
     font-weight: 400;
 }
 
-/*HEADER*/
-header {
-    padding-left: 5rem;
-    padding-right: 5rem;
-    padding-top: 1rem;
-    height: 96px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.id-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 1rem;
+    box-shadow: 2px 4px 8px 0 #c4c4c4;
+}
+
+li {
+    list-style-type: none;
 }
 
 .logo {
     max-width: 18rem;
+}
+
+.photographer-description {
+    width: calc(100% / 3);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.price {
+    font-size: 9px;
+    line-height: 12px;
+    /* identical to box height */
+    text-align: center;
+    margin: 0;
+    color: var(--secondary-dark);
+}
+
+.responsive-nav {
+    display: none;
 }
 
 .tag {
@@ -70,23 +90,24 @@ header {
     border: 0.5px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 11px;
-
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     /* identical to box height */
-
     text-align: center;
-
     color: #911C1C;
     padding: 0 0.4rem;
     margin: 0.2rem;
 }
 
-.responsive-nav {
-    display: none;
+ul {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+/* ----------------------------------- RESPONSIVE ----------------------------------- */
 @media screen and (max-width: 1250px) {
     .responsive-nav {
         display: flex;
@@ -108,62 +129,10 @@ header {
     }
 }
 
-/*MAIN PAGE*/
-#cards {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 3rem;
-    justify-content: space-around;
-}
-
-/*CARD*/
-.photographer-description {
-    width: calc(100% / 3);
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-.card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.id-photo {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-
-}
-
-.description {
-    font-size: 10px;
-    line-height: 13px;
-    /* identical to box height */
-
-    text-align: center;
-    margin: 0;
-    color: #000000;
-}
-
-.price {
-    font-size: 9px;
-    line-height: 12px;
-    /* identical to box height */
-
-    text-align: center;
-    margin: 0;
-    color: #757575;
-}
-
 @media screen and (max-width: 700px) {
     #cards {
-       /* flex-direction: column;
-        align-items: center;*/
+        /* flex-direction: column;
+         align-items: center;*/
         margin-top: 0;
     }
 
@@ -171,25 +140,4 @@ header {
         width: 100%;
         margin-top: 1rem;
     }
-}
-
-/*ARTIST PAGE*/
-.artist-header {
-    background: #FAFAFA;
-    border-radius: 5px;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.artist-header section h2, h3, .description, .card-tags {
-    text-align: center;
-}
-.align-left {
-    justify-content: left;
-}
-
-.btn {
-    height: 2rem;
 }

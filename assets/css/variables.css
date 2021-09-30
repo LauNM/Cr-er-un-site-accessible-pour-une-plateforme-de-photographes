@@ -1,0 +1,24 @@
+:root {
+    --primary-dark: #901c1c;
+    --primary-light: #d3573c;
+    --secondary-dark: #525252;
+    --secondary-light: #fafafa;
+
+    font-family: DM Sans, serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+body {
+    padding: 1rem 5rem 0 5rem;
+}
+header {
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
