@@ -42,7 +42,7 @@ export class Artist {
         }
 
         this.artistPage = () => {
-            return `<!-- <div>-->
+            return `<div>
                         <div class="artist-header">
                             <div class="artist-presentation">
                                 <section class="artist-infos">
@@ -63,24 +63,51 @@ export class Artist {
                             </div>
                             <img src="../img/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
                         </div>
-                        <!--<section class="artist-main">
+                        <section class="artist-main">
                             <label for="sort-by">Trier par :</label>
                             <select name="sort" id="sort-by">
-                               <option class="select-item" value="popularity">Popularité</option>
-                               <option class="select-item" value="date">Date</option>
-                               <option class="select-item" value="title">Titre</option>
+                                <option class="select-item" value="popularity">Popularité</option>
+                                <option class="select-item" value="date">Date</option>
+                                <option class="select-item" value="title">Titre</option>
                             </select>
-                            <div class="artist-photos">
-                                <article class="photos">
-                                    <img src="" alt="Photo" class="photo">
-                                    <span>
-                                        <h2></h2>
-                                        <h2></h2>
-                                    </span>
-                                </article>
-                            </div>
-                        </section>-->
-<!--                    </div>-->`
+                           <!-- <div class="photos-section" id="photo-section"></div>-->
+                                
+                            
+                        </section>
+                    </div>`
+        }
+
+        this.sendName = () => {
+            return this._name;
+        }
+
+
+
+    }
+}
+
+export class Media {
+    constructor(id, photographerId, title, image,tags, likes, date, price) {
+        this._id = id;
+        this._photographerId = photographerId;
+        this._title = title;
+        this._image = image;
+        this._tags = tags;
+        this._likes = likes;
+        this._date = date;
+        this._price = price;
+
+        this.createArticlePhoto = () => {
+            return `<article class="artist-photos">
+                       <img src="../img/Mimi Keel/${this._image}" alt="Photo" class="photo">
+                        <div class="photo-infos">
+                            <p class="photo-title">${this._title}</p>
+                            <span class="likes">
+                                <p>${this._likes}</p>
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </div>
+                    </article>`
         }
     }
 }
