@@ -76,22 +76,17 @@ export class Artist {
                         </section>
                     </div>`
         }
-
-        this.sendName = () => {
-            return this._name;
-        }
-
-
-
     }
 }
 
 export class Media {
-    constructor(id, photographerId, title, image,tags, likes, date, price) {
+    constructor(id, photographerId, photographerName, title, image, video,tags, likes, date, price) {
         this._id = id;
         this._photographerId = photographerId;
+        this._photographerName = photographerName;
         this._title = title;
         this._image = image;
+        this._video = video;
         this._tags = tags;
         this._likes = likes;
         this._date = date;
@@ -99,7 +94,7 @@ export class Media {
 
         this.createArticlePhoto = () => {
             return `<article class="artist-photos">
-                       <img src="../img/Mimi Keel/${this._image}" alt="Photo" class="photo">
+                       <img src="../img/${this._photographerName}/${this._image}" alt="Photo" class="photo">
                         <div class="photo-infos">
                             <p class="photo-title">${this._title}</p>
                             <span class="likes">
@@ -112,7 +107,11 @@ export class Media {
 
         this.createArticleVideo = () => {
             return `<article class="artist-photos">
-                       <video src="../img/Mimi Keel/${this._image}"></video>
+                        <video controls class="video">
+                          <source src="../img/${this._photographerName}/${this._video}" type="video/mp4">
+                          <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
+                             Voici <a href="../img/${this._photographerName}/${this._video}">un lien pour télécharger la vidéo</a>.</p>
+                        </video>
                         <div class="photo-infos">
                             <p class="photo-title">${this._title}</p>
                             <span class="likes">

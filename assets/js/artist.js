@@ -6,14 +6,14 @@ function createPage(data) {
         const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
         artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
 }
-function renderPhoto(data) {
+function renderPhoto(data, photographerName) {
 
-        const photo = new Media(data.id, data._photographerId, data.title, data.image, data.tags, data.likes, data.date, data.price);
+        const photo = new Media(data.id, data._photographerId, photographerName, data.title, data.image,data.video,data.tags, data.likes, data.date, data.price);
         mediaSection.insertAdjacentHTML('afterbegin', photo.createArticlePhoto());
 }
-function renderVideo(data) {
+function renderVideo(data, photographerName) {
 
-    const video = new Media(data.id, data._photographerId, data.title, data.image, data.tags, data.likes, data.date, data.price);
+    const video = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', video.createArticleVideo());
 }
 // THEN
@@ -38,17 +38,21 @@ fetch('/assets/data.json').then(response => {
 
     const photographerData = infos.filter(info => info.id === test);
     createPage(photographerData[0]);
-
+    const photographerName = photographerData[0].name;
+console.log(photographerName)
     const mediaData = media.filter(photo => photo.photographerId === test);
+
     const imageRegex = /.*\.(gif|jpe?g|bmp|png)$/igm;
+    const videoRegex = /.*\.(mp4)$/igm;
     mediaData.forEach((item) => {
         if (imageRegex.test(item.image)){
-            renderPhoto(item);
+            renderPhoto(item, photographerName);
         }
-         else renderVideo(media)
-
+        if (videoRegex.test(item.video)){
+            renderVideo(item, photographerName);
+        }
     })
-console.log(photographerData[0])
+
 
 }).catch(err => {
     console.log(err);
