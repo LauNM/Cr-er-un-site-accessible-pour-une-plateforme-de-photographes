@@ -109,5 +109,18 @@ export class Media {
                         </div>
                     </article>`
         }
+
+        this.createArticleVideo = () => {
+            return `<article class="artist-photos">
+                       <video src="../img/Mimi Keel/${this._image}"></video>
+                        <div class="photo-infos">
+                            <p class="photo-title">${this._title}</p>
+                            <span class="likes">
+                                <p>${this._likes}</p>
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </div>
+                    </article>`
+        }
     }
 }

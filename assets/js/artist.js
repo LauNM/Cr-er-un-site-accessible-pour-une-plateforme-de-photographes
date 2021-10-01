@@ -5,26 +5,29 @@ function createPage(data) {
 
         const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
         artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
-    ;
 }
 function renderPhoto(data) {
 
         const photo = new Media(data.id, data._photographerId, data.title, data.image, data.tags, data.likes, data.date, data.price);
-        photoSection.insertAdjacentHTML('afterbegin', photo.createArticlePhoto());
-    ;
+        mediaSection.insertAdjacentHTML('afterbegin', photo.createArticlePhoto());
+}
+function renderVideo(data) {
+
+    const video = new Media(data.id, data._photographerId, data.title, data.image, data.tags, data.likes, data.date, data.price);
+    mediaSection.insertAdjacentHTML('afterbegin', video.createArticleVideo());
 }
 // THEN
 const artistSection = document.getElementById("artist");
-const photoSection = document.getElementById("photo-section");
+const mediaSection = document.getElementById("media-section");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 let infos = [];
-let photos = [];
+let media = [];
 fetch('/assets/data.json').then(response => {
     return response.json();
 }).then(data => {
     infos = [...data.photographers];
-    photos = [...data.media];
+    media = [...data.media];
     //const test gets argument in URL and keeps only what is after "?id="
     const test = parseInt(window.location.search.slice(4));
     //const test2 gets argument, cut it after "=" and return only the value
@@ -32,11 +35,19 @@ fetch('/assets/data.json').then(response => {
     //better way to get id ?
     const idPhotographer = parseInt((new URLSearchParams(window.location.search)).get('id'));
 
-   const photographerData = infos.filter(info => info.id === test);
-   const mediaData = photos.filter(photo => photo.photographerId === test);
-   console.log(photographerData[0]);
-   createPage(photographerData[0]);
-   renderPhoto(mediaData[0]);
+
+    const photographerData = infos.filter(info => info.id === test);
+    createPage(photographerData[0]);
+
+    const mediaData = media.filter(photo => photo.photographerId === test);
+    const imageRegex = /.*\.(gif|jpe?g|bmp|png)$/igm;
+    mediaData.forEach((item) => {
+        if (imageRegex.test(item.image)){
+            renderPhoto(item);
+        }
+         else renderVideo(media)
+
+    })
 console.log(photographerData[0])
 
 }).catch(err => {
