@@ -38,7 +38,7 @@ const responsiveNavTags = document.getElementById("responsive-nav-tags");
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 
 let infos = []
-fetch('/assets/data.json').then(response => {
+fetch('../data.json').then(response => {
     return response.json();
 }).then(data => {
     data.photographers.forEach((e) => {infos.push(e); } )

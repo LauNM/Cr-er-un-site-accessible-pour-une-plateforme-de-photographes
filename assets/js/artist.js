@@ -23,7 +23,7 @@ const mediaSection = document.getElementById("media-section");
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 let infos = [];
 let media = [];
-fetch('/assets/data.json').then(response => {
+fetch('../data.json').then(response => {
     return response.json();
 }).then(data => {
     infos = [...data.photographers];
