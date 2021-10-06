@@ -36,6 +36,10 @@
     color: var(--secondary-dark);
 }
 
+.dayPrice {
+    margin-left: 3rem;
+}
+
 .description {
     font-size: 18px;
     line-height: 23px;
@@ -136,6 +140,14 @@ select#sort-by {
     margin: 0.2rem;
 }
 
+#totalOfLikes {
+    background-color: var(--primary-light);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    float: right;
+}
 ul {
     padding: 0;
 }

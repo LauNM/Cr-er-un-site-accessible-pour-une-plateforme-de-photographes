@@ -3,27 +3,29 @@ import { Media } from "./classes.js";
 
 function displayPage(data) {
 
-        const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
-        artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
+    const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
+    artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
+    totalOfLikes.insertAdjacentHTML('beforeend', artist.displayPrice());
 }
-/* function renderPhoto(data, photographerName) {
 
-    const photo = new Media(data.id, data._photographerId, photographerName, data.title, data.image,data.video,data.tags, data.likes, data.date, data.price);
-    mediaSection.insertAdjacentHTML('afterbegin', photo.createArticlePhoto());
-}
-function renderVideo(data, photographerName) {
-
-    const video = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
-    mediaSection.insertAdjacentHTML('afterbegin', video.createArticleVideo());
-} */
 function renderMedia(data, photographerName) {
 
     const media = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', media.createMedia());
+    
 }
+
+function renderTotalLikes(total) {
+    return `<span>
+                ${total} 
+                <i class="fas fa-heart"></i>
+            </span>`
+}
+
 // THEN
 const artistSection = document.getElementById("artist");
 const mediaSection = document.getElementById("media-section");
+const totalOfLikes = document.getElementById("totalOfLikes");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 let infos = [];
@@ -40,18 +42,15 @@ fetch('../data.json').then(response => {
     displayPage(photographerData[0]);
     const photographerName = photographerData[0].name;
 
-    const mediaData = media.filter(photo => photo.photographerId === idPhotographer);
+    const mediaData = media.filter(item => item.photographerId === idPhotographer);
 
+    let total = 0;
     mediaData.forEach((item) => {
-        renderMedia(item, photographerName)
-      /*   if (item.image){
-            renderPhoto(item, photographerName);
-        }
-        if (item.video){
-            renderVideo(item, photographerName);
-        } */
+        renderMedia(item, photographerName);
+        total += item.likes;
     })
 
+    totalOfLikes.insertAdjacentHTML('afterbegin',  renderTotalLikes(total));
 
 }).catch(err => {
     console.log(err);

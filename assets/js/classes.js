@@ -73,11 +73,17 @@ export class Artist {
                         </section>
                     </div>`
         }
+        
+        this.displayPrice = () => {
+            return `<span class="dayPrice">
+                        ${this._price}€ / jour
+                    </span>`
+        }
     }
 }
 
 export class Media {
-    constructor(id, photographerId, photographerName, title, image, video,tags, likes, date, price) {
+    constructor(id, photographerId, photographerName, title, image, video, tags, likes, date, price) {
         this._id = id;
         this._photographerId = photographerId;
         this._photographerName = photographerName;
@@ -90,7 +96,7 @@ export class Media {
         this._price = price;
 
         this.createMedia = () => {
-            return `<article class="artist-media">
+            return `<article id="${this._id}" class="artist-media">
                         ${this.chooseMediaType()}
                     <div class="media-infos">
                         <p class="media-title">${this._title}</p>
@@ -111,6 +117,18 @@ export class Media {
                const videoType = new Video(this._photographerName, this._video);
                return videoType.makeVideo();
             }
+        }
+
+        this.displayTotalLikes = () => {
+            return ` <span>    
+                        ${this._likes} 
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    
+            `
+        }
+        
+        this.incrementLikes = () => {
         }
     }
 }
