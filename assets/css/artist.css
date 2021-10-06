@@ -6,7 +6,7 @@
     padding: 2rem;
 }
 
-.artist-photos {
+.artist-media {
     width: calc(80% / 3);
     min-width: 300px;
     display: flex;
@@ -93,17 +93,17 @@ li {
     width: 100%;
     border-radius: 5px;
 }
-.photo-infos {
+.media-infos {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.photos-section {
+.medias {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.photo-title {
+.media-title {
     color: var(--primary-dark);
     font-size: 24px;
     line-height: 31px;

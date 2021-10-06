@@ -12,9 +12,9 @@ export class Artist {
 
         this.createArticleArtist = () => {
             return ` <article class="photographer-description">
-                        <a href="./assets/pages/artist.html?id=${this._id}" id="${this._name}">
+                        <a tabindex="0" href="./assets/pages/artist.html?id=${this._id}" id="${this._name}">
                             <section class="card-header">
-                                <img src="assets/img/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
+                                <img src="assets/media/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
                                 <h2>${this._name}</h2>
                             </section>
                         </a>
@@ -58,21 +58,18 @@ export class Artist {
                                     </section>
                                 </section>
                                 <section class="button">
-                                    <button class="contact-btn">Contactez-moi</button>
+                                    <button tabindex="0" class="contact-btn">Contactez-moi</button>
                                 </section>
                             </div>
-                            <img src="../img/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
+                            <img src="../media/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
                         </div>
                         <section class="artist-main">
                             <label for="sort-by">Trier par :</label>
-                            <select name="sort" id="sort-by">
-                                <option class="select-item" value="popularity">Popularité</option>
-                                <option class="select-item" value="date">Date</option>
-                                <option class="select-item" value="title">Titre</option>
-                            </select>
-                           <!-- <div class="photos-section" id="photo-section"></div>-->
-                                
-                            
+                            <select tabindex="0" name="sort" id="sort-by">
+                                <option tabindex="0" class="select-item" value="popularity">Popularité</option>
+                                <option tabindex="0" class="select-item" value="date">Date</option>
+                                <option tabindex="0" class="select-item" value="title">Titre</option>
+                            </select>                             
                         </section>
                     </div>`
         }
@@ -92,34 +89,55 @@ export class Media {
         this._date = date;
         this._price = price;
 
-        this.createArticlePhoto = () => {
-            return `<article class="artist-photos">
-                       <img src="../img/${this._photographerName}/${this._image}" alt="Photo" class="photo">
-                        <div class="photo-infos">
-                            <p class="photo-title">${this._title}</p>
-                            <span class="likes">
-                                <p>${this._likes}</p>
-                                <i class="fas fa-heart"></i>
-                            </span>
-                        </div>
-                    </article>`
-        }
+        this.createMedia = () => {
+            return `<article class="artist-media">
+                        ${this.chooseMediaType()}
+                    <div class="media-infos">
+                        <p class="media-title">${this._title}</p>
+                        <span class="likes">
+                            <p>${this._likes}</p>
+                            <i tabindex="0" class="fas fa-heart"></i>
+                        </span>
+                    </div>
+                </article>`
+            }
 
-        this.createArticleVideo = () => {
-            return `<article class="artist-photos">
-                        <video class="video" data-state="hidden">
-                          <source src="../img/${this._photographerName}/${this._video}" type="video/mp4">
-                          <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
-                             Voici <a href="../img/${this._photographerName}/${this._video}">un lien pour télécharger la vidéo</a>.</p>
-                        </video>
-                        <div class="photo-infos">
-                            <p class="photo-title">${this._title}</p>
-                            <span class="likes">
-                                <p>${this._likes}</p>
-                                <i class="fas fa-heart"></i>
-                            </span>
-                        </div>
-                    </article>`
+        this.chooseMediaType = () => {
+            if (this._image) {
+               const imageType = new Image(this._photographerName, this._image);
+                return imageType.makeImage();
+            }
+            if (this._video) {
+               const videoType = new Video(this._photographerName, this._video);
+               return videoType.makeVideo();
+            }
+        }
+    }
+}
+
+class Image extends Media {
+    constructor(photographerName, image) {
+        super()
+        this._photographerName = photographerName;
+        this._image = image;
+        this.makeImage = () => {
+            return ` <img tabindex="0" src="../media/${this._photographerName}/${this._image}" alt="Photo" class="photo">`
+               
+        }
+    }
+}
+
+class Video extends Media {
+    constructor(photographerName, video) {
+        super()
+        this._photographerName = photographerName;
+        this._video = video;
+        this.makeVideo = () => {
+            return ` <video tabindex="0" class="video" data-state="hidden">
+                        <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
+                        <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
+                        Voici <a href="../media/${this._photographerName}/${this._video}">un lien pour télécharger la vidéo</a>.</p>
+                    </video>`
         }
     }
 }

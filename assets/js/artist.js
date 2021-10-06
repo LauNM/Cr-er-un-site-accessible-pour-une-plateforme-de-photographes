@@ -6,7 +6,7 @@ function displayPage(data) {
         const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
         artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
 }
-function renderPhoto(data, photographerName) {
+/* function renderPhoto(data, photographerName) {
 
     const photo = new Media(data.id, data._photographerId, photographerName, data.title, data.image,data.video,data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', photo.createArticlePhoto());
@@ -15,6 +15,11 @@ function renderVideo(data, photographerName) {
 
     const video = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', video.createArticleVideo());
+} */
+function renderMedia(data, photographerName) {
+
+    const media = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
+    mediaSection.insertAdjacentHTML('afterbegin', media.createMedia());
 }
 // THEN
 const artistSection = document.getElementById("artist");
@@ -38,12 +43,13 @@ fetch('../data.json').then(response => {
     const mediaData = media.filter(photo => photo.photographerId === idPhotographer);
 
     mediaData.forEach((item) => {
-        if (item.image){
+        renderMedia(item, photographerName)
+      /*   if (item.image){
             renderPhoto(item, photographerName);
         }
         if (item.video){
             renderVideo(item, photographerName);
-        }
+        } */
     })
 
 
