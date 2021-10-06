@@ -1,6 +1,6 @@
 import { Artist } from "./classes.js";
 //Create html list with tags
-const addTagsNav = (tags) => {
+const createTagsNav = (tags) => {
     let list = '';
     tags.forEach(tag => {
         list += `<li class="tag">
@@ -10,7 +10,7 @@ const addTagsNav = (tags) => {
     return list;
 }
 
-//Create tab with all tags in data
+//Create tab with all tags found in data
 const tagsList = (data) => {
     let tagsTab = [];
     data.forEach(el => {
@@ -23,7 +23,7 @@ const tagsList = (data) => {
     return tagsTab;
 }
 
-function createCard(data) {
+function displayArtistCardList(data) {
     data.forEach(e => {
         const artist = new Artist(e.id, e.portrait, e.name, e.city, e.country, e.tagline, e.price, e.tags);
         cardsSection.insertAdjacentHTML('afterbegin', artist.createArticleArtist());
@@ -41,11 +41,10 @@ let infos = []
 fetch('./assets/data.json').then(response => {
     return response.json();
 }).then(data => {
-    data.photographers.forEach((e) => {infos.push(e); } )
-    console.log(data)
-    createCard(infos);
-    navTags.insertAdjacentHTML('afterbegin', addTagsNav(tagsList(infos)));
-    responsiveNavTags.insertAdjacentHTML('afterbegin', addTagsNav(tagsList(infos)));
+    infos = [...data.photographers];
+    displayArtistCardList(infos);
+    navTags.insertAdjacentHTML('afterbegin', createTagsNav(tagsList(infos)));
+    responsiveNavTags.insertAdjacentHTML('afterbegin', createTagsNav(tagsList(infos)));
 
 }).catch(err => {
     console.log(err);

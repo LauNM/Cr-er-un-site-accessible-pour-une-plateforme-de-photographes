@@ -107,7 +107,7 @@ export class Media {
 
         this.createArticleVideo = () => {
             return `<article class="artist-photos">
-                        <video controls class="video">
+                        <video class="video" data-state="hidden">
                           <source src="../img/${this._photographerName}/${this._video}" type="video/mp4">
                           <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
                              Voici <a href="../img/${this._photographerName}/${this._video}">un lien pour télécharger la vidéo</a>.</p>
