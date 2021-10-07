@@ -12,7 +12,7 @@ function renderMedia(data, photographerName) {
 
     const media = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', media.createMedia());
-    
+
 }
 
 function renderTotalLikes(total) {
@@ -26,6 +26,7 @@ function renderTotalLikes(total) {
 const artistSection = document.getElementById("artist");
 const mediaSection = document.getElementById("media-section");
 const totalOfLikes = document.getElementById("totalOfLikes");
+const likesIcon = document.getElementsByClassName("likesIcon");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 let infos = [];

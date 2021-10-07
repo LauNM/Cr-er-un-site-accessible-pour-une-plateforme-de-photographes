@@ -141,12 +141,15 @@ select#sort-by {
 }
 
 #totalOfLikes {
+    position: fixed;
+    bottom:0;
+    right: 0;
     background-color: var(--primary-light);
     padding: 1rem 2rem;
     border-radius: 5px;
     font-size: 24px;
     font-weight: 500;
-    float: right;
+    margin-right: 88px;
 }
 ul {
     padding: 0;

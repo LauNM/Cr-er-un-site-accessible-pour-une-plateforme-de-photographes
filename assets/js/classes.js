@@ -73,7 +73,7 @@ export class Artist {
                         </section>
                     </div>`
         }
-        
+
         this.displayPrice = () => {
             return `<span class="dayPrice">
                         ${this._price}€ / jour
@@ -102,7 +102,7 @@ export class Media {
                         <p class="media-title">${this._title}</p>
                         <span class="likes">
                             <p>${this._likes}</p>
-                            <i tabindex="0" class="fas fa-heart"></i>
+                            <i tabindex="0" class="fas fa-heart likesIcon" ></i>
                         </span>
                     </div>
                 </article>`
@@ -119,16 +119,8 @@ export class Media {
             }
         }
 
-        this.displayTotalLikes = () => {
-            return ` <span>    
-                        ${this._likes} 
-                        <i class="fas fa-heart"></i>
-                    </span>
-                    
-            `
-        }
-        
         this.incrementLikes = () => {
+            return this._likes++;
         }
     }
 }
@@ -140,7 +132,7 @@ class Image extends Media {
         this._image = image;
         this.makeImage = () => {
             return ` <img tabindex="0" src="../media/${this._photographerName}/${this._image}" alt="Photo" class="photo">`
-               
+
         }
     }
 }
