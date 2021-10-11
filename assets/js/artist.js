@@ -12,6 +12,7 @@ function renderMedia(data, photographerName) {
 
     const media = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
     mediaSection.insertAdjacentHTML('afterbegin', media.createMedia());
+    media.incrementLikes();
 
 }
 

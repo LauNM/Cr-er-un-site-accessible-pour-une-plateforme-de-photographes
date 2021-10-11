@@ -92,6 +92,7 @@ export class Media {
         this._video = video;
         this._tags = tags;
         this._likes = likes;
+        this._moreLikes = this._likes++;
         this._date = date;
         this._price = price;
 
@@ -101,8 +102,8 @@ export class Media {
                     <div class="media-infos">
                         <p class="media-title">${this._title}</p>
                         <span class="likes">
-                            <p>${this._likes}</p>
-                            <i tabindex="0" class="fas fa-heart likesIcon" ></i>
+                            <p class="numberOfLikes">${this._likes}</p>
+                            <i tabindex="0" class="fas fa-heart likesIcon" onclick="this.incrementLikes()"></i>
                         </span>
                     </div>
                 </article>`
@@ -120,7 +121,7 @@ export class Media {
         }
 
         this.incrementLikes = () => {
-            return this._likes++;
+            console.log(document.getElementsByClassName('numberOfLikes').value);
         }
     }
 }
