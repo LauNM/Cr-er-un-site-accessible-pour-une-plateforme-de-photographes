@@ -41,8 +41,94 @@ export class Artist {
             return list;
         }
 
-        this.artistPage = () => {
-            return `<div>
+        this.displayArtistInfo = () => {
+            const artistInfoSection = document.createElement('section');
+            artistInfoSection.className = "artist-infos";
+
+            const artistName = document.createElement('h1');
+            artistName.textContent = this._name;
+            const artistMain = document.createElement('section');
+            artistMain.className = "artist-main";
+
+                const localisation = document.createElement('p');
+                localisation.className = "localisation";
+                localisation.textContent = `${this._city}, ${this._country}`; 
+                const description = document.createElement('p');
+                description.className = "description";
+                description.textContent = this._tagline;
+
+                artistMain.appendChild(localisation);
+                artistMain.appendChild(description);
+
+            const tags = document.createElement('section');
+            tags.className = "tags";
+                const list = document.createElement('ul');
+                list.insertAdjacentHTML('afterbegin',this.addTagsArtist());
+                tags.appendChild(list);
+
+            artistInfoSection.appendChild(artistName);
+            artistInfoSection.appendChild(artistMain);
+            artistInfoSection.appendChild(tags);
+            return artistInfoSection;
+        }
+
+        this.displayButtonContact = () => {
+            const contactSection = document.createElement('section');
+            contactSection.className = "button";
+                const contactBtn = document.createElement('button');
+                contactBtn.className = "contact-btn";
+                contactBtn.id = "contact-this-artist";
+                contactBtn.tabIndex = "0";
+                contactBtn.textContent = "Contactez-moi";
+                contactBtn.addEventListener('click', () => {
+                    document.getElementById('contact-artist-form').style.display = "block";
+                })
+
+            contactSection.appendChild(contactBtn);
+            return contactSection;
+        }
+
+        this.displayIdPhoto = () => {
+            const idPhoto = document.createElement('img');
+            idPhoto.className = "id-photo";
+            idPhoto.src = `../media/Photographers/${this._portrait}`;
+            idPhoto.alt = "ID Photo";
+            
+            return idPhoto;
+        }
+
+        this.displayPage = () => {
+            const artistHeader = document.createElement('div');
+            artistHeader.className = "artist-header";
+                const artistPresentation = document.createElement('div');
+                artistPresentation.className = "artist-presentation";
+                artistPresentation.appendChild(this.displayArtistInfo());
+                artistPresentation.appendChild(this.displayButtonContact());
+            artistHeader.appendChild(artistPresentation);
+            artistHeader.appendChild(this.displayIdPhoto());
+
+            return artistHeader;
+        }
+
+        this.displaySelectFilter = () => {
+            return `<section class="artist-main">
+                        <label for="sort-by">Trier par :</label>
+                        <select tabindex="0" name="sort" id="sort-by">
+                            <option tabindex="0" class="select-item" value="popularity">Popularité</option>
+                            <option tabindex="0" class="select-item" value="date">Date</option>
+                            <option tabindex="0" class="select-item" value="title">Titre</option>
+                        </select>                             
+                    </section>`
+        }
+
+        this.displayArtistNameInForm = () => {
+            const span = document.createElement('span');
+            span.textContent = this._name;
+            return span;
+        }
+        
+        /* this.artistPage = () => {
+            return `
                         <div class="artist-header">
                             <div class="artist-presentation">
                                 <section class="artist-infos">
@@ -57,6 +143,7 @@ export class Artist {
                                         </ul>
                                     </section>
                                 </section>
+
                                 <section class="button">
                                     <button tabindex="0" class="contact-btn">Contactez-moi</button>
                                 </section>
@@ -71,9 +158,66 @@ export class Artist {
                                 <option tabindex="0" class="select-item" value="title">Titre</option>
                             </select>                             
                         </section>
-                    </div>`
+                        <div class="bground">
+                            <div class="content">
+                                <h1>Contactez-moi</h1>
+                                <p>${this._name}</p>
+                                <span class="close"></span>
+                                <div class="modal-body">
+                                    <form
+                                            id="contact"
+                                            name="contact"
+                                            method="post"
+                                    >
+                                        <div class="formData">
+                                            <label for="first">Prénom</label><br>
+                                            <input
+                                                    class="text-control"
+                                                    type="text"
+                                                    id="first"
+                                                    name="first"
+                                            /><br>
+                                        </div>
+                                        <div class="formData">
+                                            <label for="last">Nom</label><br>
+                                            <input
+                                                    class="text-control"
+                                                    type="text"
+                                                    id="last"
+                                                    name="last"
+                                            /><br>
+                                        </div>
+                                        <div class="formData">
+                                            <label for="email">E-mail</label><br>
+                                            <input
+                                                    class="text-control"
+                                                    type="email"
+                                                    id="email"
+                                                    name="email"
+                                            /><br>
+                                        </div>
+                                        <div class="formData">
+                                            <label for="message">Votre message</label><br>
+                                            <input
+                                                    class="text-control"
+                                                    type="textarea"
+                                                    id="message"
+                                                    name="message"
+                                            /><br>
+                                        </div>
+                                       
+                                        <input
+                                                class="button btn-submit"
+                                                type="submit"
+                                                value="Envoyer"
+                                        />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>`
         }
-
+ */
+       
         this.displayPrice = () => {
             return `<span class="dayPrice">
                         ${this._price}€ / jour
@@ -84,6 +228,7 @@ export class Artist {
 
 export class Media {
     constructor(id, photographerId, photographerName, title, image, video, tags, likes, date, price) {
+                
         this._id = id;
         this._photographerId = photographerId;
         this._photographerName = photographerName;
@@ -92,23 +237,53 @@ export class Media {
         this._video = video;
         this._tags = tags;
         this._likes = likes;
-        this._moreLikes = this._likes++;
         this._date = date;
         this._price = price;
+        
 
         this.createMedia = () => {
-            return `<article id="${this._id}" class="artist-media">
-                        ${this.chooseMediaType()}
-                    <div class="media-infos">
-                        <p class="media-title">${this._title}</p>
-                        <span class="likes">
-                            <p class="numberOfLikes">${this._likes}</p>
-                            <i tabindex="0" class="fas fa-heart likesIcon" onclick="this.incrementLikes()"></i>
-                        </span>
-                    </div>
-                </article>`
-            }
+            let newValue = this._likes;
 
+            const article = document.createElement("article");
+            article.id = this._id;
+            article.className = "artist-media";
+
+            const mediaInfo = document.createElement("div");
+            mediaInfo.className = "media-infos";
+
+            const title = document.createElement("p");
+            title.className = "media-title";
+            title.textContent = this._title;
+
+            const likeSection = document.createElement("span");
+            likeSection.className = "likes-section";
+
+            const numberOfLikes = document.createElement("p");
+            numberOfLikes.className = "likes";
+            numberOfLikes.textContent = newValue;
+
+            const heartIcon = document.createElement("i");
+            heartIcon.className = "fas fa-heart";
+            heartIcon.tabIndex = "0";
+
+            heartIcon.addEventListener('click', () => {
+                newValue += 1;
+                numberOfLikes.textContent = newValue;
+            });
+            /* heartIcon.addEventListener('keypress', () => {
+                let newLikes = this._likes += 1;
+                numberOfLikes.textContent.replace(this._likes, newLikes);   
+            }); */
+            likeSection.appendChild(numberOfLikes);
+            likeSection.appendChild(heartIcon);
+            mediaInfo.appendChild(title);
+            mediaInfo.appendChild(likeSection);
+            article.insertAdjacentHTML('afterbegin',this.chooseMediaType())
+            article.appendChild(mediaInfo);
+
+            return article;
+        }
+        
         this.chooseMediaType = () => {
             if (this._image) {
                const imageType = new Image(this._photographerName, this._image);
@@ -119,10 +294,15 @@ export class Media {
                return videoType.makeVideo();
             }
         }
-
-        this.incrementLikes = () => {
-            console.log(document.getElementsByClassName('numberOfLikes').value);
-        }
+        
+        
+       
+    }
+    addLikes = (likes) => {
+        this._likes += 1;
+    }
+    getLikes = () => {
+        return this._likes;
     }
 }
 

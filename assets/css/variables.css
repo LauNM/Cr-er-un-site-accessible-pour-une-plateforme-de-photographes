@@ -3,6 +3,7 @@
     --primary-light: #d3573c;
     --secondary-dark: #525252;
     --secondary-light: #fafafa;
+    --dark: #000000;
 
     font-family: DM Sans, serif;
     font-style: normal;
@@ -21,4 +22,10 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 860px) {
+    body {
+        padding: 1rem 1rem 0 1rem;
+    }
 }

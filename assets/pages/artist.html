@@ -23,6 +23,57 @@
 </header>
 <main>
     <div id="artist"></div>
+    <div id="contact-artist-form">
+        <div class="content">
+            <span class="close"></span>
+            <h1 class="dark">Contactez-moi</h1>
+            <p class="dark subtitle" id="formArtistName"></p>
+            
+            <form
+                    id="contact"
+                    name="contact"
+                    method="post"
+            >
+                <div class="formData">
+                    <label class="contact-label" for="first">Prénom</label><br>
+                    <input
+                            class="text-control"
+                            type="text"
+                            id="first"
+                            name="first"
+                    /><br>
+                </div>
+                <div class="formData">
+                    <label class="contact-label" for="last">Nom</label><br>
+                    <input
+                            class="text-control"
+                            type="text"
+                            id="last"
+                            name="last"
+                    /><br>
+                </div>
+                <div class="formData">
+                    <label class="contact-label" for="email">E-mail</label><br>
+                    <input
+                            class="text-control"
+                            type="email"
+                            id="email"
+                            name="email"
+                    /><br>
+                </div>
+                <div class="formData">
+                    <label class="contact-label"for="message">Votre message</label><br>
+                    <textarea
+                            class="text-control"
+                            id="message"
+                            name="message"
+                    ></textarea>
+                </div>
+            </form> 
+            <button id="submitFormBtn" class="contact-btn"> Envoyer </button>
+           
+        </div>
+    </div>
     <div class="medias" id="media-section"></div>
     <span id="totalOfLikes"></span>
 </main>
