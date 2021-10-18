@@ -85,7 +85,6 @@
 .content {
     margin: 1% auto;
     padding: 1rem 2rem;
-    width: 100%;
     max-width: 670px;
     animation-name: modalopen;
     animation-duration: var(--modal-duration);
@@ -270,9 +269,9 @@ ul {
         width: 70%;
     }
 
-    .artist-main {
+   /*  .artist-main {
         display: none;
-    }
+    } */
     .artist-presentation {
         width: 100%;
     }
@@ -281,6 +280,33 @@ ul {
         bottom: 15px;
         left: 30%;
         padding: 0;
+    }
+    
+    #contact {
+        width: 90%;
+    }
+    .contact-btn {
+        font-size: 18px;
+    }
+
+    #contact-artist-form > .content {
+        padding: 1rem;
+    }
+    #contact-artist-form > .content > h1, span {
+       font-size: 36px;
+    }
+  /*   .close {
+        
+     } */
+    .close:before,
+    .close:after {
+        left: 15px;
+        height: 19px;
+        width: 3px;
+    }
+
+    .contact-label {
+        font-size: 24px;
     }
 
     h1 {
@@ -315,6 +341,7 @@ ul {
         font-size: 13px;
         line-height: 17px;  
     }
+  
     #totalOfLikes {
         display: none;
     }
