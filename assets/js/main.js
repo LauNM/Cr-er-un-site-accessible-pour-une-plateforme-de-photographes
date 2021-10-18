@@ -56,6 +56,7 @@ const filter = (data, tag, filterData) => {
 const cardsSection = document.getElementById("cards");
 const navTags = document.getElementById("nav");
 const responsiveNavTags = document.getElementById("responsive-nav");
+const goToContent = document.getElementById("goToContent");
 
 
 
@@ -79,3 +80,14 @@ fetch('./assets/data.json').then(response => {
 }).catch(err => {
     console.log(err);
 });
+
+function appear() {
+    let y = window.scrollY;
+    console.log(y)
+    if (y < 130){
+        goToContent.className = "hide"
+    } else {
+        goToContent.className = "show btn"
+    }
+}
+window.addEventListener("scroll", appear);
