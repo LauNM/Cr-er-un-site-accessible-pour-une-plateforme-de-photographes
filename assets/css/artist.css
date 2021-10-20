@@ -49,6 +49,9 @@
     transform: rotate(-45deg);
 }
 
+#contact {
+    width: 100%;
+}
 
 #contact-artist-form {
     display: none;
@@ -100,9 +103,9 @@
     color: var(--dark)
 }
 
-.dayPrice {
+/* #dayPrice {
     margin-left: 3rem;
-}
+} */
 
 .description {
     font-size: 18px;
@@ -241,17 +244,25 @@ textarea#message {
     height: 48px;
 }
 
-#totalOfLikes {
+#likesAndPrice {
+    display: flex;
+    justify-content: space-between;
+    width: 376px;
     position: fixed;
     bottom:0;
     right: 0;
     background-color: var(--primary-light);
-    padding: 1rem 2rem;
+    padding: 21px 34px 21px 31px;
     border-radius: 5px;
     font-size: 24px;
     font-weight: 500;
-    margin-right: 88px;
+    margin-right: 36px;
 }
+
+.no-margin{
+    margin: 0;
+}
+
 ul {
     padding: 0;
 }
@@ -354,7 +365,7 @@ ul {
         line-height: 17px;  
     }
   
-    #totalOfLikes {
+    #likesAndPrice {
         display: none;
     }
 }

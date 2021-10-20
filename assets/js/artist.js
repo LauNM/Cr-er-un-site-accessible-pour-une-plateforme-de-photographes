@@ -1,82 +1,61 @@
-import { Artist } from "./classes.js";
-import { Media } from "./classes.js";
+import { Artist, Media, mediaList } from "./classes.js";
 
 
 function displayPage(data) {
 
     const artist = new Artist(data.id, data.portrait, data.name, data.city, data.country, data.tagline, data.price, data.tags);
   
-    artistSection.appendChild(artist.displayPage());
+    artistSection.appendChild(artist.createPage());
     artistSection.insertAdjacentHTML('beforeend', artist.displaySelectFilter());
     formArtistName.appendChild(artist.displayArtistNameInForm());
-    //artistSection.insertAdjacentHTML('afterbegin', artist.artistPage());
-    totalOfLikes.insertAdjacentHTML('beforeend', artist.displayPrice());
+    priceSection.insertAdjacentHTML('beforeend', artist.displayPrice());
+    
 }
 
 function renderMedia(data, photographerName) {
 
-    const media = new Media(data.id, data._photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
+    const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
+    //Stock { media } into mediaList that is created in classes.js
+    mediaList.push(media);
     mediaSection.appendChild(media.createMedia());
-}
 
-/* function calculateTotalOfLikes(photographer, media) {
     let total = 0;
-    media.forEach((item) => {
-        // console.log(item)
-        renderMedia(item, photographer);
-        total += item.likes;
-    })
-    return total;
-} */
-
-function renderTotal(tabOfLikes) {
-    let numTotal = 0;
-    tabOfLikes.forEach((item) => {
-        numTotal += parseInt(item);
+    mediaList.forEach((item) => {
+        total += item._likes;
     });
-    return numTotal;
-}
-
-function renderTotalLikes(total) {
-    return `<span>
-                ${total} 
-                <i class="fas fa-heart"></i>
-            </span>`
+    
+    totalOfLikes.innerHTML = total;
 }
 
 // THEN
 const artistSection = document.getElementById("artist");
 const formArtistName = document.getElementById("formArtistName");
 const mediaSection = document.getElementById("media-section");
-const totalOfLikes = document.getElementById("totalOfLikes");
+const priceSection = document.getElementById("dayPrice");
 const closeBtn = document.querySelector(".close");
-
-// const likes = document.getElementsByClassName("likes")
+const totalOfLikes = document.getElementById("totalOfLikes");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
-let infos = [];
-let media = [];
+
 fetch('../data.json').then(response => {
     return response.json();
 }).then(data => {
-    infos = [...data.photographers];
-    media = [...data.media];
+    let infos = [...data.photographers];
+    let media = [...data.media];
 
+    // Get id of photographer in the URL to fetch all media & infos for this photographer
     const idPhotographer = parseInt((new URLSearchParams(window.location.search)).get('id'), 10);
+    const [photographerData] = (infos.filter(info => info.id === idPhotographer));
 
-    const photographerData = (infos.filter(info => info.id === idPhotographer));
-    displayPage(photographerData[0]);
-    const photographerName = photographerData[0].name;
+    displayPage(photographerData);
 
+    const photographerName = photographerData.name;
+
+    //Keep media from the wanted photographer thanks to the photographer_id
     const mediaData = media.filter(item => item.photographerId === idPhotographer);
 
-    //const total = calculateTotalOfLikes(photographerName, mediaData);
-    mediaData.forEach((item) => { renderMedia(item, photographerName); })
-    const likes = [...document.querySelectorAll(".likes")].map(element => element.innerHTML);
-    const total = renderTotal(likes);
 
-    totalOfLikes.insertAdjacentHTML('afterbegin',  renderTotalLikes(total));
-    
+    mediaData.forEach((item) => { renderMedia(item, photographerName); })   
 
 }).catch(err => {
     console.log(err);

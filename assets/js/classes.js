@@ -1,3 +1,38 @@
+export let filteredData = [];
+export const mediaList = [];
+export let selectedTag = [];
+
+
+export const addTags = (tags) => {
+        const list = document.createElement('ul');
+
+        tags.forEach(tag => {
+            const item = document.createElement('li');
+            item.className = "tag";
+            const link = document.createElement('a');
+            link.textContent = `#${tag}`;
+            // link.href = "/";
+            link.addEventListener('click', () => {
+                filteredData = [];
+                filter(mediaList, tag);
+                console.log(filteredData)
+            })
+            item.appendChild(link);
+            list.appendChild(item)
+        })
+        return list;
+    };
+
+const filter = (data, tag) => {
+    
+    data.filter((item) => {
+       if (item._tags.includes(tag)) {
+           filteredData.push(item);
+       } 
+    })
+    return filteredData;
+}
+
 export class Artist {
     constructor(id, portrait, name, city, country, tagline, price, tags) {
         this._id = id;
@@ -11,37 +46,59 @@ export class Artist {
 
 
         this.createArticleArtist = () => {
-            return ` <article class="photographer-description">
-                        <a tabindex="0" href="./assets/pages/artist.html?id=${this._id}" id="${this._name}">
-                            <section class="card-header">
-                                <img src="assets/media/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
-                                <h2>${this._name}</h2>
-                            </section>
-                        </a>
-                        <section class="card-main">
-                            <h3>${this._city}, ${this._country}</h3>
-                            <p class="description">${this._tagline}</p>
-                            <p class="price">${this._price} €/jour</p>
-                        </section>
-                        <section class="card-tags">
-                            <ul>
-                                ${this.addTagsArtist()}
-                            </ul>
-                        </section>
-                    </article> `
+            const article = document.createElement('article');
+            article.className = "photographer-description";
+
+                const a = document.createElement('a');
+                a.tabIndex = "0";
+                a.href =`./assets/pages/artist.html?id=${this._id}` ;
+                a.id=`${this._name}`;
+
+                    const cardHeader = document.createElement('section');
+                    cardHeader.className="card-header";
+
+                        const img = document.createElement('img');
+                        img.src = `assets/media/Photographers/${this._portrait}`;
+                        img.alt = "ID photo";
+                        img.className = "id-photo";
+
+                        const name = document.createElement('h2');
+                        name.textContent = this._name;
+
+                        cardHeader.appendChild(img);
+                        cardHeader.appendChild(name);
+                    a.appendChild(cardHeader);
+                
+                const cardMain = document.createElement('section');
+                cardMain.className = "card-main";
+
+                    const title = document.createElement('h3');
+                    title.textContent = `${this._city}, ${this._country}`;
+
+                    const description = document.createElement('p');
+                    description.className = "description";
+                    description.textContent = this._tagline;
+
+                    const price = document.createElement('p');
+                    price.className = "price";
+                    price.textContent = `${this._price} €/jour`;
+
+                    cardMain.appendChild(title);
+                    cardMain.appendChild(description);
+                    cardMain.appendChild(price);
+
+                const cardTags = document.createElement('section');
+                cardTags.className = "card-tags";
+                cardTags.appendChild(addTags(this._tags));
+
+            article.appendChild(a);
+            article.appendChild(cardMain);
+            article.appendChild(cardTags);
+
+            return article;
         }
 
-        this.addTagsArtist = () => {
-            let list = '';
-            this._tags.forEach(tag => {
-                list += `<li class="tag">
-                            <a href="#">#${tag}</a>
-                        </li>`
-            })
-            return list;
-        }
-
-        this.displayArtistInfo = () => {
+        this.createArtistInfo = () => {
             const artistInfoSection = document.createElement('section');
             artistInfoSection.className = "artist-infos";
 
@@ -62,9 +119,7 @@ export class Artist {
 
             const tags = document.createElement('section');
             tags.className = "tags";
-                const list = document.createElement('ul');
-                list.insertAdjacentHTML('afterbegin',this.addTagsArtist());
-                tags.appendChild(list);
+            tags.appendChild(addTags(this._tags));
 
             artistInfoSection.appendChild(artistName);
             artistInfoSection.appendChild(artistMain);
@@ -72,7 +127,7 @@ export class Artist {
             return artistInfoSection;
         }
 
-        this.displayButtonContact = () => {
+        this.createButtonContact = () => {
             const contactSection = document.createElement('section');
             contactSection.className = "button";
                 const contactBtn = document.createElement('button');
@@ -88,7 +143,7 @@ export class Artist {
             return contactSection;
         }
 
-        this.displayIdPhoto = () => {
+        this.createIdPhoto = () => {
             const idPhoto = document.createElement('img');
             idPhoto.className = "id-photo";
             idPhoto.src = `../media/Photographers/${this._portrait}`;
@@ -97,15 +152,15 @@ export class Artist {
             return idPhoto;
         }
 
-        this.displayPage = () => {
+        this.createPage = () => {
             const artistHeader = document.createElement('div');
             artistHeader.className = "artist-header";
                 const artistPresentation = document.createElement('div');
                 artistPresentation.className = "artist-presentation";
-                artistPresentation.appendChild(this.displayArtistInfo());
-                artistPresentation.appendChild(this.displayButtonContact());
+                artistPresentation.appendChild(this.createArtistInfo());
+                artistPresentation.appendChild(this.createButtonContact());
             artistHeader.appendChild(artistPresentation);
-            artistHeader.appendChild(this.displayIdPhoto());
+            artistHeader.appendChild(this.createIdPhoto());
 
             return artistHeader;
         }
@@ -126,102 +181,9 @@ export class Artist {
             span.textContent = this._name;
             return span;
         }
-        
-        /* this.artistPage = () => {
-            return `
-                        <div class="artist-header">
-                            <div class="artist-presentation">
-                                <section class="artist-infos">
-                                    <h1>${this._name}</h1>
-                                    <section class="artist-main">
-                                        <p class="localisation">${this._city}, ${this._country}</p>
-                                        <p class="description">${this._tagline}</p>
-                                    </section>
-                                    <section class="tags">
-                                       <ul>
-                                            ${this.addTagsArtist()}
-                                        </ul>
-                                    </section>
-                                </section>
-
-                                <section class="button">
-                                    <button tabindex="0" class="contact-btn">Contactez-moi</button>
-                                </section>
-                            </div>
-                            <img src="../media/Photographers/${this._portrait}" alt="ID photo" class="id-photo">
-                        </div>
-                        <section class="artist-main">
-                            <label for="sort-by">Trier par :</label>
-                            <select tabindex="0" name="sort" id="sort-by">
-                                <option tabindex="0" class="select-item" value="popularity">Popularité</option>
-                                <option tabindex="0" class="select-item" value="date">Date</option>
-                                <option tabindex="0" class="select-item" value="title">Titre</option>
-                            </select>                             
-                        </section>
-                        <div class="bground">
-                            <div class="content">
-                                <h1>Contactez-moi</h1>
-                                <p>${this._name}</p>
-                                <span class="close"></span>
-                                <div class="modal-body">
-                                    <form
-                                            id="contact"
-                                            name="contact"
-                                            method="post"
-                                    >
-                                        <div class="formData">
-                                            <label for="first">Prénom</label><br>
-                                            <input
-                                                    class="text-control"
-                                                    type="text"
-                                                    id="first"
-                                                    name="first"
-                                            /><br>
-                                        </div>
-                                        <div class="formData">
-                                            <label for="last">Nom</label><br>
-                                            <input
-                                                    class="text-control"
-                                                    type="text"
-                                                    id="last"
-                                                    name="last"
-                                            /><br>
-                                        </div>
-                                        <div class="formData">
-                                            <label for="email">E-mail</label><br>
-                                            <input
-                                                    class="text-control"
-                                                    type="email"
-                                                    id="email"
-                                                    name="email"
-                                            /><br>
-                                        </div>
-                                        <div class="formData">
-                                            <label for="message">Votre message</label><br>
-                                            <input
-                                                    class="text-control"
-                                                    type="textarea"
-                                                    id="message"
-                                                    name="message"
-                                            /><br>
-                                        </div>
-                                       
-                                        <input
-                                                class="button btn-submit"
-                                                type="submit"
-                                                value="Envoyer"
-                                        />
-                                    </form>
-                                </div>
-                            </div>
-                        </div>`
-        }
- */
        
         this.displayPrice = () => {
-            return `<span class="dayPrice">
-                        ${this._price}€ / jour
-                    </span>`
+            return this._price;
         }
     }
 }
@@ -242,7 +204,6 @@ export class Media {
         
 
         this.createMedia = () => {
-            let newValue = this._likes;
 
             const article = document.createElement("article");
             article.id = this._id;
@@ -260,15 +221,24 @@ export class Media {
 
             const numberOfLikes = document.createElement("p");
             numberOfLikes.className = "likes";
-            numberOfLikes.textContent = newValue;
+            numberOfLikes.textContent = this._likes;
 
             const heartIcon = document.createElement("i");
             heartIcon.className = "fas fa-heart";
             heartIcon.tabIndex = "0";
 
             heartIcon.addEventListener('click', () => {
-                newValue += 1;
-                numberOfLikes.textContent = newValue;
+                this._likes += 1;
+                numberOfLikes.textContent = this._likes;
+                console.log(mediaList)
+                
+                let total = 0;
+                mediaList.forEach((item) => {
+                    total += item._likes;
+                });
+
+                document.querySelector("#totalOfLikes").innerHTML = total;
+            
             });
             /* heartIcon.addEventListener('keypress', () => {
                 let newLikes = this._likes += 1;
@@ -297,9 +267,6 @@ export class Media {
         
         
        
-    }
-    addLikes = (likes) => {
-        this._likes += 1;
     }
     getLikes = () => {
         return this._likes;

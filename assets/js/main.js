@@ -1,28 +1,5 @@
-import { Artist } from "./classes.js";
-
-
-//Create html list with tags
-
-const createTagsNav = (tags, listId) => {
-    const list = document.createElement('ul');
-    list.id = listId;
-    tags.forEach(tag => {
-        const listItem = document.createElement('li');
-    
-        const item = document.createElement('a');
-        item.className = "tag";
-        item.href="#";
-        item.textContent = '#'+tag;
-        item.id = tag;
-        item.addEventListener('click', () => {
-            console.log('coucou', tag)
-        })
-
-        listItem.appendChild(item);
-        list.appendChild(listItem);
-    })
-    return list;
-}
+import { Artist, addTags, mediaList } from "./classes.js";
+import { filteredData } from "./classes.js";
 
 
 
@@ -42,16 +19,11 @@ const tagsList = (data) => {
 function displayArtistCardList(data) {
     data.forEach(e => {
         const artist = new Artist(e.id, e.portrait, e.name, e.city, e.country, e.tagline, e.price, e.tags);
-        cardsSection.insertAdjacentHTML('afterbegin', artist.createArticleArtist());
+        mediaList.push(artist)
+        cardsSection.appendChild(artist.createArticleArtist());
     });
 }
 
-const filter = (data, tag, filterData) => {
-    data.filter((item) => {
-        item.tags.includes(tag) ? filterData.push(item) : ''
-    })
-   return filterData;
-}
 // THEN
 const cardsSection = document.getElementById("cards");
 const navTags = document.getElementById("nav");
@@ -62,19 +34,19 @@ const goToContent = document.getElementById("goToContent");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 
-let infos = []
 fetch('./assets/data.json').then(response => {
     return response.json();
 }).then(data => {
-    infos = [...data.photographers];
+    let infos = [...data.photographers];
     const tagList = tagsList(infos);
-    let filteredData = [];
+   
 
     //filter function not dynamic yet
-    filter(infos, '', filteredData);
-    navTags.appendChild(createTagsNav(tagList, "nav-tags"));
-    responsiveNavTags.appendChild(createTagsNav(tagList,"responsive-nav-tags"));
-    filteredData.length === 0 ? displayArtistCardList(infos) : displayArtistCardList(filteredData);
+   
+    navTags.appendChild(addTags(tagList));
+    responsiveNavTags.appendChild(addTags(tagList));
+    displayArtistCardList(infos);
+    console.log(filteredData)
 
     
 }).catch(err => {
@@ -83,8 +55,7 @@ fetch('./assets/data.json').then(response => {
 
 function appear() {
     let y = window.scrollY;
-    console.log(y)
-    if (y < 130){
+    if (y < 50){
         goToContent.className = "hide"
     } else {
         goToContent.className = "show btn"
