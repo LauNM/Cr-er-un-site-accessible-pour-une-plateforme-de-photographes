@@ -1,4 +1,4 @@
-import { Artist, Media, mediaList } from "./classes.js";
+import { Artist, Media, infoList } from "./classes.js";
 
 
 function displayPage(data) {
@@ -15,12 +15,12 @@ function displayPage(data) {
 function renderMedia(data, photographerName) {
 
     const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
-    //Stock { media } into mediaList that is created in classes.js
-    mediaList.push(media);
+    //Stock { media } into infoList that is created in classes.js
+    infoList.push(media);
     mediaSection.appendChild(media.createMedia());
 
     let total = 0;
-    mediaList.forEach((item) => {
+    infoList.forEach((item) => {
         total += item._likes;
     });
     

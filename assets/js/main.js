@@ -1,4 +1,4 @@
-import { Artist, addTags, mediaList } from "./classes.js";
+import { Artist, addTags, infoList } from "./classes.js";
 import { filteredData } from "./classes.js";
 
 
@@ -19,7 +19,7 @@ const tagsList = (data) => {
 function displayArtistCardList(data) {
     data.forEach(e => {
         const artist = new Artist(e.id, e.portrait, e.name, e.city, e.country, e.tagline, e.price, e.tags);
-        mediaList.push(artist)
+        infoList.push(artist)
         cardsSection.appendChild(artist.createArticleArtist());
     });
 }
@@ -39,14 +39,12 @@ fetch('./assets/data.json').then(response => {
 }).then(data => {
     let infos = [...data.photographers];
     const tagList = tagsList(infos);
-   
 
     //filter function not dynamic yet
    
     navTags.appendChild(addTags(tagList));
     responsiveNavTags.appendChild(addTags(tagList));
     displayArtistCardList(infos);
-    console.log(filteredData)
 
     
 }).catch(err => {
