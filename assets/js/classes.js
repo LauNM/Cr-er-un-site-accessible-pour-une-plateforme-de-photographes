@@ -287,7 +287,13 @@ class Image extends Media {
         this._photographerName = photographerName;
         this._image = image;
         this.makeImage = () => {
-            return ` <img tabindex="0" src="../media/${this._photographerName}/${this._image}" alt="Photo" class="photo">`
+            return ` <a href="../media/${this._photographerName}/${this._image}" class="media-link">
+                        <img 
+                        tabindex="0" 
+                        src="../media/${this._photographerName}/${this._image}" 
+                        alt="Photo" 
+                        class="photo">
+                    </a>`
 
         }
     }
@@ -299,11 +305,14 @@ class Video extends Media {
         this._photographerName = photographerName;
         this._video = video;
         this.makeVideo = () => {
-            return ` <video tabindex="0" class="video" data-state="hidden">
-                        <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
-                        <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
-                        Voici <a href="../media/${this._photographerName}/${this._video}">un lien pour télécharger la vidéo</a>.</p>
-                    </video>`
+            return ` <a href="../media/${this._photographerName}/${this._video}" class="media-link">
+                        <video 
+                        tabindex="0" 
+                        class="video" 
+                        data-state="hidden">
+                            <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
+                        </video>
+                    </a>`
         }
     }
 }

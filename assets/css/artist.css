@@ -169,6 +169,10 @@ li {
 .logo {
     max-width: 18rem;
 }
+
+.media-link {
+    width: 100%;
+}
 .photo {
     object-fit: cover;
     height: 300px;
