@@ -5,6 +5,7 @@ class Lightbox {
             e.preventDefault();
             new Lightbox(e.currentTarget.getAttribute('href'))
         }))
+        console.log(links)
     }
 
     /**
