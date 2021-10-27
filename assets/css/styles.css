@@ -7,14 +7,14 @@
 
 .full-width {
     position: fixed;
-    top: 1rem;
+    top: 6px;
     width: calc(100% - 88px*2);
 }
 #goToContent {
     width: 170px;
     height: 19px;
     margin: auto;
-    background-color: var(--primary-light);
+    background-color: var(--background-light);
     color: var(--dark);
     border-radius: 5px;
     border: none;
