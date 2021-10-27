@@ -1,5 +1,5 @@
-import { Artist, addTags, infoList } from "./classes.js";
-import { filteredData } from "./classes.js";
+import { addTags, infoList } from "./classes/functions.js";
+import { Artist } from "./classes/artist.js";
 
 
 

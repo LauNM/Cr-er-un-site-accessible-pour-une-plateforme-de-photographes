@@ -258,7 +258,7 @@ textarea#message {
     position: fixed;
     bottom:0;
     right: 0;
-    background-color: var(--primary-light);
+    background-color: var(--background-light);
     padding: 21px 34px 21px 31px;
     border-radius: 5px;
     font-size: 24px;

@@ -1,4 +1,6 @@
-import { Artist, Media, infoList } from "./classes.js";
+import { infoList } from "./classes/functions.js";
+import { Artist } from "./classes/artist.js";
+import { Media } from "./classes/media.js";
 
 
 function displayPage(data) {
