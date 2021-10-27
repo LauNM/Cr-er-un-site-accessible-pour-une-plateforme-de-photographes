@@ -1,3 +1,5 @@
+import { Lightbox } from "./lightbox.js";
+
 export let filteredData = [];
 export const infoList = [];
 export let selectedTag = [];
@@ -5,38 +7,37 @@ export let selectedTag = [];
 const cardsSection = document.getElementById("cards");
 
 export const addTags = (tags) => {
-        const list = document.createElement('ul');
-        tags.forEach(tag => {
-            const item = document.createElement('li');
-            item.className = "tag";
-            const link = document.createElement('a');
-            link.textContent = `#${tag}`;
-            
-                link.addEventListener('click', () => {
-                if (window.location.search.length === 0) {
-                    cardsSection.innerHTML = '';
-                    filteredData = [];
-                    filter(infoList, tag)
-                } 
-                else {
-                    link.href = '/';
-                    
-                }  
-            })
-            
-            
-            item.appendChild(link);
-            list.appendChild(item)
+    const list = document.createElement('ul');
+    tags.forEach(tag => {
+        const item = document.createElement('li');
+        item.className = "tag";
+        const link = document.createElement('a');
+        link.textContent = `#${tag}`;
+
+        link.addEventListener('click', () => {
+            if (window.location.search.length === 0) {
+                cardsSection.innerHTML = '';
+                filteredData = [];
+                filter(infoList, tag)
+            }
+            else {
+                link.href = `/?tag=${tag}`;
+            }
         })
-        return list;
-    };
+
+
+        item.appendChild(link);
+        list.appendChild(item)
+    })
+    return list;
+};
 
 const filter = (data, tag) => {
     data.filter((e) => {
-       if (e._tags.includes(tag)) {
-        cardsSection.appendChild(e.createArticleArtist());
-        filteredData.push(e);
-       } 
+        if (e._tags.includes(tag)) {
+            cardsSection.appendChild(e.createArticleArtist());
+            filteredData.push(e);
+        }
     })
     return filteredData;
 }
@@ -57,47 +58,47 @@ export class Artist {
             const article = document.createElement('article');
             article.className = "photographer-description";
 
-                const a = document.createElement('a');
-                a.tabIndex = "0";
-                a.href =`./assets/pages/artist.html?id=${this._id}` ;
-                a.id=`${this._name}`;
+            const a = document.createElement('a');
+            a.tabIndex = "0";
+            a.href = `./assets/pages/artist.html?id=${this._id}`;
+            a.id = `${this._name}`;
 
-                    const cardHeader = document.createElement('section');
-                    cardHeader.className="card-header";
+            const cardHeader = document.createElement('section');
+            cardHeader.className = "card-header";
 
-                        const img = document.createElement('img');
-                        img.src = `assets/media/Photographers/${this._portrait}`;
-                        img.alt = "ID photo";
-                        img.className = "id-photo";
+            const img = document.createElement('img');
+            img.src = `assets/media/Photographers/${this._portrait}`;
+            img.alt = "ID photo";
+            img.className = "id-photo";
 
-                        const name = document.createElement('h2');
-                        name.textContent = this._name;
+            const name = document.createElement('h2');
+            name.textContent = this._name;
 
-                        cardHeader.appendChild(img);
-                        cardHeader.appendChild(name);
-                    a.appendChild(cardHeader);
-                
-                const cardMain = document.createElement('section');
-                cardMain.className = "card-main";
+            cardHeader.appendChild(img);
+            cardHeader.appendChild(name);
+            a.appendChild(cardHeader);
 
-                    const title = document.createElement('h3');
-                    title.textContent = `${this._city}, ${this._country}`;
+            const cardMain = document.createElement('section');
+            cardMain.className = "card-main";
 
-                    const description = document.createElement('p');
-                    description.className = "description";
-                    description.textContent = this._tagline;
+            const title = document.createElement('h3');
+            title.textContent = `${this._city}, ${this._country}`;
 
-                    const price = document.createElement('p');
-                    price.className = "price";
-                    price.textContent = `${this._price} €/jour`;
+            const description = document.createElement('p');
+            description.className = "description";
+            description.textContent = this._tagline;
 
-                    cardMain.appendChild(title);
-                    cardMain.appendChild(description);
-                    cardMain.appendChild(price);
+            const price = document.createElement('p');
+            price.className = "price";
+            price.textContent = `${this._price} €/jour`;
 
-                const cardTags = document.createElement('section');
-                cardTags.className = "card-tags";
-                cardTags.appendChild(addTags(this._tags));
+            cardMain.appendChild(title);
+            cardMain.appendChild(description);
+            cardMain.appendChild(price);
+
+            const cardTags = document.createElement('section');
+            cardTags.className = "card-tags";
+            cardTags.appendChild(addTags(this._tags));
 
             article.appendChild(a);
             article.appendChild(cardMain);
@@ -115,15 +116,15 @@ export class Artist {
             const artistMain = document.createElement('section');
             artistMain.className = "artist-main";
 
-                const localisation = document.createElement('p');
-                localisation.className = "localisation";
-                localisation.textContent = `${this._city}, ${this._country}`; 
-                const description = document.createElement('p');
-                description.className = "description";
-                description.textContent = this._tagline;
+            const localisation = document.createElement('p');
+            localisation.className = "localisation";
+            localisation.textContent = `${this._city}, ${this._country}`;
+            const description = document.createElement('p');
+            description.className = "description";
+            description.textContent = this._tagline;
 
-                artistMain.appendChild(localisation);
-                artistMain.appendChild(description);
+            artistMain.appendChild(localisation);
+            artistMain.appendChild(description);
 
             const tags = document.createElement('section');
             tags.className = "tags";
@@ -138,14 +139,14 @@ export class Artist {
         this.createButtonContact = () => {
             const contactSection = document.createElement('section');
             contactSection.className = "button";
-                const contactBtn = document.createElement('button');
-                contactBtn.className = "contact-btn";
-                contactBtn.id = "contact-this-artist";
-                contactBtn.tabIndex = "0";
-                contactBtn.textContent = "Contactez-moi";
-                contactBtn.addEventListener('click', () => {
-                    document.getElementById('contact-artist-form').style.display = "block";
-                })
+            const contactBtn = document.createElement('button');
+            contactBtn.className = "contact-btn";
+            contactBtn.id = "contact-this-artist";
+            contactBtn.tabIndex = "0";
+            contactBtn.textContent = "Contactez-moi";
+            contactBtn.addEventListener('click', () => {
+                document.getElementById('contact-artist-form').style.display = "block";
+            })
 
             contactSection.appendChild(contactBtn);
             return contactSection;
@@ -156,17 +157,17 @@ export class Artist {
             idPhoto.className = "id-photo";
             idPhoto.src = `../media/Photographers/${this._portrait}`;
             idPhoto.alt = "ID Photo";
-            
+
             return idPhoto;
         }
 
         this.createPage = () => {
             const artistHeader = document.createElement('div');
             artistHeader.className = "artist-header";
-                const artistPresentation = document.createElement('div');
-                artistPresentation.className = "artist-presentation";
-                artistPresentation.appendChild(this.createArtistInfo());
-                artistPresentation.appendChild(this.createButtonContact());
+            const artistPresentation = document.createElement('div');
+            artistPresentation.className = "artist-presentation";
+            artistPresentation.appendChild(this.createArtistInfo());
+            artistPresentation.appendChild(this.createButtonContact());
             artistHeader.appendChild(artistPresentation);
             artistHeader.appendChild(this.createIdPhoto());
 
@@ -189,7 +190,7 @@ export class Artist {
             span.textContent = this._name;
             return span;
         }
-       
+
         this.displayPrice = () => {
             return this._price;
         }
@@ -198,7 +199,7 @@ export class Artist {
 
 export class Media {
     constructor(id, photographerId, photographerName, title, image, video, tags, likes, date, price) {
-                
+
         this._id = id;
         this._photographerId = photographerId;
         this._photographerName = photographerName;
@@ -209,7 +210,7 @@ export class Media {
         this._likes = likes;
         this._date = date;
         this._price = price;
-        
+
 
         this.createMedia = () => {
 
@@ -232,21 +233,21 @@ export class Media {
             numberOfLikes.textContent = this._likes;
 
             const heartIcon = document.createElement("i");
-            heartIcon.className = "fas fa-heart";
+            heartIcon.className = "fas fa-heart click";
             heartIcon.tabIndex = "0";
 
             heartIcon.addEventListener('click', () => {
                 this._likes += 1;
                 numberOfLikes.textContent = this._likes;
                 console.log(infoList)
-                
+
                 let total = 0;
                 infoList.forEach((item) => {
                     total += item._likes;
                 });
 
                 document.querySelector("#totalOfLikes").innerHTML = total;
-            
+
             });
             /* heartIcon.addEventListener('keypress', () => {
                 let newLikes = this._likes += 1;
@@ -256,25 +257,26 @@ export class Media {
             likeSection.appendChild(heartIcon);
             mediaInfo.appendChild(title);
             mediaInfo.appendChild(likeSection);
-            article.insertAdjacentHTML('afterbegin',this.chooseMediaType())
+            // article.insertAdjacentHTML('afterbegin',this.chooseMediaType())
+            article.appendChild(this.chooseMediaType())
             article.appendChild(mediaInfo);
 
             return article;
         }
-        
+
         this.chooseMediaType = () => {
             if (this._image) {
-               const imageType = new Image(this._photographerName, this._image);
+                const imageType = new Image(this._photographerName, this._image);
                 return imageType.makeImage();
             }
             if (this._video) {
-               const videoType = new Video(this._photographerName, this._video);
-               return videoType.makeVideo();
+                const videoType = new Video(this._photographerName, this._video);
+                return videoType.makeVideo();
             }
         }
-        
-        
-       
+
+
+
     }
     getLikes = () => {
         return this._likes;
@@ -287,14 +289,19 @@ class Image extends Media {
         this._photographerName = photographerName;
         this._image = image;
         this.makeImage = () => {
-            return ` <a href="../media/${this._photographerName}/${this._image}" class="media-link">
-                        <img 
-                        tabindex="0" 
-                        src="../media/${this._photographerName}/${this._image}" 
-                        alt="Photo" 
-                        class="photo">
-                    </a>`
-
+            const link = document.createElement('a');
+            //link.href = `../media/${this._photographerName}/${this._image}`;
+            link.href = `#`;
+            link.className = "media-link";
+            link.innerHTML = `  <img 
+                                    tabindex="0" 
+                                    src="../media/${this._photographerName}/${this._image}" 
+                                    alt="Photo" 
+                                    class="photo">`;
+            link.addEventListener('click', (e) => {
+                new Lightbox( `../media/${this._photographerName}/${this._image}`)
+            })
+            return link;
         }
     }
 }
@@ -305,14 +312,20 @@ class Video extends Media {
         this._photographerName = photographerName;
         this._video = video;
         this.makeVideo = () => {
-            return ` <a href="../media/${this._photographerName}/${this._video}" class="media-link">
-                        <video 
-                        tabindex="0" 
-                        class="video" 
-                        data-state="hidden">
-                            <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
-                        </video>
-                    </a>`
+            const link = document.createElement('a');
+            link.href = `#`;
+           // link.href = `../media/${this._photographerName}/${this._video}`;
+            link.className = "media-link";
+            link.innerHTML =`<video 
+                                tabindex="0" 
+                                class="video" 
+                                data-state="hidden">
+                                    <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
+                                </video>`;
+            link.addEventListener('click', (e) => {
+                new Lightbox( `../media/${this._photographerName}/${this._video}`)
+            })
+            return link;
         }
     }
 }

@@ -1,3 +1,7 @@
+.fadeOut {
+    opacity: 0;
+}
+
 .lightbox {
     position: fixed;
     top: 0;
@@ -8,6 +12,7 @@
     z-index: 10;
     overflow: auto;
     animation: lightboxIn .5s;
+    transition: opacity .3s;
 }
 
 .lightbox__next,

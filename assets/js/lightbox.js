@@ -1,22 +1,26 @@
-class Lightbox {
+export class Lightbox {
 
-    static init () {
-        const links = document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]').forEach(link => link.addEventListener('click', e => {
-            e.preventDefault();
-            new Lightbox(e.currentTarget.getAttribute('href'))
-        }))
-        console.log(links)
-    }
 
     /**
      * 
      * @param {string} url URL de l'image
      */
     constructor (url) {
-        const element = this.buildDom(url)
-        document.body.appendChild(element)
+        this.element = this.buildDom(url)
+        document.body.appendChild(this.element)
     }
 
+    /**
+     * Close lightbox
+     * @param {MouseEvent} e 
+     */
+    close (e) {
+        e.preventDefault();
+       // this.element.className('fadeOut');
+        window.setTimeout(() => {
+            this.element.parentElement.removeChild(this.element)
+        }, 300)
+    }
 
     /**
      * 
@@ -31,7 +35,8 @@ class Lightbox {
         <button class="lightbox__previous">précédent</button>
         <div class="lightbox__container">
             <img src="${url}" alt="">
-        </div>`
+        </div>`;
+        dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this))
         return dom;
 
     }
@@ -48,4 +53,3 @@ class Lightbox {
         </div>
     </div>
  */
-Lightbox.init()

@@ -44,8 +44,9 @@ fetch('./assets/data.json').then(response => {
    
     navTags.appendChild(addTags(tagList));
     responsiveNavTags.appendChild(addTags(tagList));
+    console.log((new URLSearchParams(window.location.search)).get('tag'))
     displayArtistCardList(infos);
-
+    
     
 }).catch(err => {
     console.log(err);
@@ -56,7 +57,7 @@ function appear() {
     if (y < 50){
         goToContent.className = "hide"
     } else {
-        goToContent.className = "show btn"
+        goToContent.className = "show"
     }
 }
 window.addEventListener("scroll", appear);

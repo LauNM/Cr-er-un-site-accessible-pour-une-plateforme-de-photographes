@@ -23,6 +23,9 @@
     padding: 1rem 3rem;
 }
 
+.click:hover {
+    cursor: pointer;
+}
 .close {
     position: absolute;
     right: 65px;
