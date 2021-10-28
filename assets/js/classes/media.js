@@ -1,5 +1,7 @@
+import { Lightbox } from "../lightbox.js";
+import { infoList } from "./functions.js";
 export class Media {
-    constructor(id, photographerId, photographerName, title, image, video, tags, likes, date, price) {
+    constructor(id, photographerId, photographerName, title, image, video, altText, tags, likes, date, price) {
 
         this._id = id;
         this._photographerId = photographerId;
@@ -7,12 +9,13 @@ export class Media {
         this._title = title;
         this._image = image;
         this._video = video;
+        this._altText = altText;
         this._tags = tags;
         this._likes = likes;
         this._date = date;
         this._price = price;
 
-
+       
         this.createMedia = () => {
 
             const article = document.createElement("article");
@@ -67,16 +70,14 @@ export class Media {
 
         this.chooseMediaType = () => {
             if (this._image) {
-                const imageType = new Image(this._photographerName, this._image);
+                const imageType = new Image(this._photographerName, this._image, this._altText);
                 return imageType.makeImage();
             }
             if (this._video) {
-                const videoType = new Video(this._photographerName, this._video);
+                const videoType = new Video(this._photographerName, this._video, this._altText);
                 return videoType.makeVideo();
             }
         }
-
-
 
     }
     getLikes = () => {
@@ -85,24 +86,24 @@ export class Media {
 }
 
 class Image extends Media {
-    constructor(photographerName, image) {
+    constructor(photographerName, image, altText) {
         super()
         this._photographerName = photographerName;
         this._image = image;
+        this._altText = altText;
         this.makeImage = () => {
-            const link = document.createElement('a');
-            //link.href = `../media/${this._photographerName}/${this._image}`;
-            link.href = `#`;
-            link.className = "media-link";
-            link.innerHTML = `  <img 
-                                    tabindex="0" 
-                                    src="../media/${this._photographerName}/${this._image}" 
-                                    alt="Photo" 
-                                    class="photo">`;
-            link.addEventListener('click', (e) => {
-                new Lightbox( `../media/${this._photographerName}/${this._image}`)
+            const image = document.createElement('img');
+            
+            image.src = `../media/${this._photographerName}/${this._image}`;
+            image.className = "photo";
+            image.tabIndex= "0";
+            image.alt = this._altText;
+            
+            image.addEventListener('click', (e) => {
+                
+                new Lightbox( infoList, image.src)
             })
-            return link;
+            return image;
         }
     }
 }
@@ -113,20 +114,19 @@ class Video extends Media {
         this._photographerName = photographerName;
         this._video = video;
         this.makeVideo = () => {
-            const link = document.createElement('a');
-            link.href = `#`;
-           // link.href = `../media/${this._photographerName}/${this._video}`;
-            link.className = "media-link";
-            link.innerHTML =`<video 
-                                tabindex="0" 
-                                class="video" 
-                                data-state="hidden">
-                                    <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
-                                </video>`;
-            link.addEventListener('click', (e) => {
-                new Lightbox( `../media/${this._photographerName}/${this._video}`)
+            const video = document.createElement('video');
+            video.tabIndex = "0";
+            video.className = "video";
+            video.setAttribute('data-state', 'hidden');
+                const source = document.createElement('source');
+                source.src = `../media/${this._photographerName}/${this._video}`;
+                source.type = "video/mp4";
+            video.appendChild(source);
+
+            video.addEventListener('click', (e) => {
+                new Lightbox( infoList, source.src)
             })
-            return link;
+            return video;
         }
     }
 }

@@ -16,7 +16,7 @@ function displayPage(data) {
 
 function renderMedia(data, photographerName) {
 
-    const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image,data.video, data.tags, data.likes, data.date, data.price);
+    const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image, data.video, data.altText, data.tags, data.likes, data.date, data.price);
     //Stock { media } into infoList that is created in classes.js
     infoList.push(media);
     mediaSection.appendChild(media.createMedia());
@@ -50,12 +50,12 @@ fetch('../data.json').then(response => {
     const [photographerData] = (infos.filter(info => info.id === idPhotographer));
 
     displayPage(photographerData);
-
+    
     const photographerName = photographerData.name;
 
     //Keep media from the wanted photographer thanks to the photographer_id
     const mediaData = media.filter(item => item.photographerId === idPhotographer);
-
+    console.log(mediaData)
 
     mediaData.forEach((item) => { renderMedia(item, photographerName); })   
 
