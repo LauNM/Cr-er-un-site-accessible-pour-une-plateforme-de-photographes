@@ -55,7 +55,6 @@ fetch('../data.json').then(response => {
 
     //Keep media from the wanted photographer thanks to the photographer_id
     const mediaData = media.filter(item => item.photographerId === idPhotographer);
-    console.log(mediaData)
 
     mediaData.forEach((item) => { renderMedia(item, photographerName); })   
 
