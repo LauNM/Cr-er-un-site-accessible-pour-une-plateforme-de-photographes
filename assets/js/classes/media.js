@@ -53,15 +53,22 @@ export class Media {
                 document.querySelector("#totalOfLikes").innerHTML = total;
 
             });
-            /* heartIcon.addEventListener('keypress', () => {
-                let newLikes = this._likes += 1;
-                numberOfLikes.textContent.replace(this._likes, newLikes);   
-            }); */
+            heartIcon.addEventListener('keypress', () => {
+                this._likes += 1;
+                numberOfLikes.textContent = this._likes;
+                console.log(infoList)
+
+                let total = 0;
+                infoList.forEach((item) => {
+                    total += item._likes;
+                });
+
+                document.querySelector("#totalOfLikes").innerHTML = total; 
+            }); 
             likeSection.appendChild(numberOfLikes);
             likeSection.appendChild(heartIcon);
             mediaInfo.appendChild(title);
             mediaInfo.appendChild(likeSection);
-            // article.insertAdjacentHTML('afterbegin',this.chooseMediaType())
             article.appendChild(this.chooseMediaType())
             article.appendChild(mediaInfo);
 
@@ -70,11 +77,11 @@ export class Media {
 
         this.chooseMediaType = () => {
             if (this._image) {
-                const imageType = new Image(this._photographerName, this._image, this._altText);
+                const imageType = new Image(this._id, this._photographerName, this._image, this._altText);
                 return imageType.makeImage();
             }
             if (this._video) {
-                const videoType = new Video(this._photographerName, this._video, this._altText);
+                const videoType = new Video(this._id, this._photographerName, this._video, this._altText);
                 return videoType.makeVideo();
             }
         }
@@ -86,8 +93,9 @@ export class Media {
 }
 
 class Image extends Media {
-    constructor(photographerName, image, altText) {
+    constructor(id, photographerName, image, altText) {
         super()
+        this._id = id;
         this._photographerName = photographerName;
         this._image = image;
         this._altText = altText;
@@ -95,13 +103,14 @@ class Image extends Media {
             const image = document.createElement('img');
             
             image.src = `../media/${this._photographerName}/${this._image}`;
+            image.id = id;
             image.className = "photo";
             image.tabIndex= "0";
             image.alt = this._altText;
             
             image.addEventListener('click', (e) => {
                 
-                new Lightbox( infoList, image.src)
+                new Lightbox( infoList, image.src, image.id)
             })
             return image;
         }
@@ -109,8 +118,9 @@ class Image extends Media {
 }
 
 class Video extends Media {
-    constructor(photographerName, video) {
+    constructor(id, photographerName, video) {
         super()
+        this._id = id;
         this._photographerName = photographerName;
         this._video = video;
         this.makeVideo = () => {
@@ -119,12 +129,13 @@ class Video extends Media {
             video.className = "video";
             video.setAttribute('data-state', 'hidden');
                 const source = document.createElement('source');
+                source.id = id;
                 source.src = `../media/${this._photographerName}/${this._video}`;
                 source.type = "video/mp4";
             video.appendChild(source);
 
             video.addEventListener('click', (e) => {
-                new Lightbox( infoList, source.src)
+                new Lightbox( infoList, source.src, source.id)
             })
             return video;
         }
