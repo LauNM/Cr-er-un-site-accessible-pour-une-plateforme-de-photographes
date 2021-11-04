@@ -38,6 +38,12 @@ export class Lightbox {
         if (e.key === 'Escape') {
             this.close(e)
         }
+        if (e.key === 'ArrowLeft') {
+            this.previous(e)
+        }
+        if (e.key === 'ArrowRight') {
+            this.next(e)
+        }
     }
     /**
      * Close lightbox
