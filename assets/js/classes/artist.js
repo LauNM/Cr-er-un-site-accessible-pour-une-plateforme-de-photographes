@@ -11,7 +11,7 @@ export class Artist {
         this._price = price;
         this._tags = tags;
 
-
+        
         this.createArticleArtist = () => {
             const article = document.createElement('article');
             article.className = "photographer-description";

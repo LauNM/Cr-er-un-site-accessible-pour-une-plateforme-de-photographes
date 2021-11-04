@@ -1,132 +1,169 @@
-export class Media {
-    constructor(id, photographerId, photographerName, title, image, video, tags, likes, date, price) {
 
+import { Lightbox } from "../lightbox.js";
+import { infoList } from "./functions.js";
+
+export class Media {
+    constructor(id, photographerId, photographerName, title, image, video, altText, tags, likes, date, price) {
         this._id = id;
         this._photographerId = photographerId;
         this._photographerName = photographerName;
         this._title = title;
         this._image = image;
         this._video = video;
+        this._altText = altText;
         this._tags = tags;
         this._likes = likes;
         this._date = date;
         this._price = price;
 
-
-        this.createMedia = () => {
-
-            const article = document.createElement("article");
-            article.id = this._id;
-            article.className = "artist-media";
-
-            const mediaInfo = document.createElement("div");
-            mediaInfo.className = "media-infos";
-
-            const title = document.createElement("p");
-            title.className = "media-title";
-            title.textContent = this._title;
-
-            const likeSection = document.createElement("span");
-            likeSection.className = "likes-section";
-
-            const numberOfLikes = document.createElement("p");
-            numberOfLikes.className = "likes";
-            numberOfLikes.textContent = this._likes;
-
-            const heartIcon = document.createElement("i");
-            heartIcon.className = "fas fa-heart click";
-            heartIcon.tabIndex = "0";
-
-            heartIcon.addEventListener('click', () => {
-                this._likes += 1;
-                numberOfLikes.textContent = this._likes;
-                console.log(infoList)
-
-                let total = 0;
-                infoList.forEach((item) => {
-                    total += item._likes;
-                });
-
-                document.querySelector("#totalOfLikes").innerHTML = total;
-
-            });
-            /* heartIcon.addEventListener('keypress', () => {
-                let newLikes = this._likes += 1;
-                numberOfLikes.textContent.replace(this._likes, newLikes);   
-            }); */
-            likeSection.appendChild(numberOfLikes);
-            likeSection.appendChild(heartIcon);
-            mediaInfo.appendChild(title);
-            mediaInfo.appendChild(likeSection);
-            // article.insertAdjacentHTML('afterbegin',this.chooseMediaType())
-            article.appendChild(this.chooseMediaType())
-            article.appendChild(mediaInfo);
-
-            return article;
-        }
-
-        this.chooseMediaType = () => {
-            if (this._image) {
-                const imageType = new Image(this._photographerName, this._image);
-                return imageType.makeImage();
-            }
-            if (this._video) {
-                const videoType = new Video(this._photographerName, this._video);
-                return videoType.makeVideo();
-            }
-        }
-
-
-
     }
     getLikes = () => {
         return this._likes;
     }
+
+    chooseMediaType = () => {
+        if (this._image) {
+            return new Image(this._id, this._photographerName, this._image, this._altText);
+        }
+        if (this._video) {
+            return new Video(this._id, this._photographerName, this._video, this._altText);
+        }
+    }
+
+    createMedia = () => {
+
+        const article = document.createElement("article");
+        article.id = this._id;
+        article.className = "artist-media";
+
+        const mediaInfo = document.createElement("div");
+        mediaInfo.className = "media-infos";
+
+        const title = document.createElement("p");
+        title.className = "media-title";
+        title.textContent = this._title;
+
+        const likeSection = document.createElement("span");
+        likeSection.className = "likes-section";
+
+        const numberOfLikes = document.createElement("p");
+        numberOfLikes.className = "likes";
+        numberOfLikes.textContent = this._likes;
+
+        const heartIcon = document.createElement("i");
+        heartIcon.className = "fas fa-heart click";
+        heartIcon.tabIndex = "0";
+
+        heartIcon.addEventListener('click', () => {
+            this._likes += 1;
+            numberOfLikes.textContent = this._likes;
+            console.log(infoList)
+
+            let total = 0;
+            infoList.forEach((item) => {
+                total += item._likes;
+            });
+
+            document.querySelector("#totalOfLikes").innerHTML = total;
+
+        });
+        heartIcon.addEventListener('keypress', () => {
+            this._likes += 1;
+            numberOfLikes.textContent = this._likes;
+            console.log(infoList)
+
+            let total = 0;
+            infoList.forEach((item) => {
+                total += item._likes;
+            });
+
+            document.querySelector("#totalOfLikes").innerHTML = total; 
+        }); 
+        likeSection.appendChild(numberOfLikes);
+        likeSection.appendChild(heartIcon);
+        mediaInfo.appendChild(title);
+        mediaInfo.appendChild(likeSection);
+
+        const mediaType = this.chooseMediaType();
+        article.appendChild(mediaType.render())
+        article.appendChild(mediaInfo);
+
+        return article;
+    }
+
 }
 
 class Image extends Media {
-    constructor(photographerName, image) {
+    constructor(id, photographerName, image, altText) {
         super()
+        this._id = id;
         this._photographerName = photographerName;
         this._image = image;
-        this.makeImage = () => {
-            const link = document.createElement('a');
-            //link.href = `../media/${this._photographerName}/${this._image}`;
-            link.href = `#`;
-            link.className = "media-link";
-            link.innerHTML = `  <img 
-                                    tabindex="0" 
-                                    src="../media/${this._photographerName}/${this._image}" 
-                                    alt="Photo" 
-                                    class="photo">`;
-            link.addEventListener('click', (e) => {
-                new Lightbox( `../media/${this._photographerName}/${this._image}`)
-            })
-            return link;
-        }
+        this._altText = altText;
+        
+    }
+    render = () => {
+        const image = document.createElement('img');
+        
+        image.src = `../media/${this._photographerName}/${this._image}`;
+        image.id = this._id;
+        image.className = "photo";
+        image.tabIndex= "0";
+        image.alt = this._altText;
+        
+        image.addEventListener('click', (e) => {
+            
+            new Lightbox(infoList, this._id)
+        })
+        return image;
+    }
+
+    renderLightbox = () => {
+        const image = document.createElement('img');
+        
+        image.src = `../media/${this._photographerName}/${this._image}`;
+        image.style.height = "90vh";
+        image.id = this._id;
+        image.alt = this._altText;
+       
+        return image;
     }
 }
 
 class Video extends Media {
-    constructor(photographerName, video) {
+    constructor(id, photographerName, video) {
         super()
+        this._id = id;
         this._photographerName = photographerName;
         this._video = video;
-        this.makeVideo = () => {
-            const link = document.createElement('a');
-            link.href = `#`;
-           // link.href = `../media/${this._photographerName}/${this._video}`;
-            link.className = "media-link";
-            link.innerHTML =`<video 
-                                tabindex="0" 
-                                class="video" 
-                                data-state="hidden">
-                                    <source src="../media/${this._photographerName}/${this._video}" type="video/mp4">
-                                </video>`;
-            link.addEventListener('click', (e) => {
-                new Lightbox( `../media/${this._photographerName}/${this._video}`)
-            })
-            return link;
-        }
+       
+    }
+    render = () => {
+        const video = document.createElement('video');
+        video.tabIndex = "0";
+        video.className = "video";
+        video.setAttribute('data-state', 'hidden');
+            const source = document.createElement('source');
+            source.id = this._id;
+            source.src = `../media/${this._photographerName}/${this._video}`;
+            source.type = "video/mp4";
+        video.appendChild(source);
+
+        video.addEventListener('click', (e) => {
+            new Lightbox( infoList, this._id)
+        })
+        return video;
+    }
+    renderLightbox = () => {
+        const video = document.createElement('video');
+        video.autoplay = true;
+        video.style.height = "90vh";
+            const source = document.createElement('source');
+            source.id = this._id;
+            source.src = `../media/${this._photographerName}/${this._video}`;
+            source.type = "video/mp4";
+        video.appendChild(source);
+
+        return video;
     }
 }

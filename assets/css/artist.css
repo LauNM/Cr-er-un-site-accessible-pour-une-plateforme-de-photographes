@@ -121,6 +121,33 @@
 .formData {
     margin-bottom: 11px;
 }
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 1em;
+    color: black;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.formData[data-error-visible="true"]::after {
+    opacity: 1;
+}
+
+.formData[data-error-visible="true"] .text-control {
+    border: 2px solid black;
+}
+
+
+/*commented*/
+input[data-error]::after {
+    content: attr(data-error);
+    font-size: 1em;
+    color: black;
+}
 
 h1 {
     margin:0;
