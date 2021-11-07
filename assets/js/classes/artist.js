@@ -1,4 +1,6 @@
 import { addTags } from "./functions.js";
+import { infoList } from "./functions.js";
+import { sortBy } from "../photographer-page.js";
 
 export class Artist {
     constructor(id, portrait, name, city, country, tagline, price, tags) {
@@ -133,14 +135,38 @@ export class Artist {
         }
 
         this.displaySelectFilter = () => {
-            return `<section class="artist-main">
-                        <label for="sort-by">Trier par :</label>
-                        <select tabindex="0" name="sort" id="sort-by">
-                            <option tabindex="0" class="select-item" value="popularity">Popularité</option>
-                            <option tabindex="0" class="select-item" value="date">Date</option>
-                            <option tabindex="0" class="select-item" value="title">Titre</option>
-                        </select>                             
-                    </section>`
+            const tab = {
+                likes : 'Popularité',
+                date : 'Date',
+                title : 'Titre'
+            }
+            const section = document.createElement('section');
+            section.className = 'artist-main';
+                const label = document.createElement('label');
+                label.for = "sort-by";
+                label.innerHTML = "Trier par :";
+
+                const select = document.createElement('select');
+                select.tabIndex = 0;
+                select.name = "sort";
+                select.id = "sort-by";
+                
+
+                for(let el in tab){
+                    const option = document.createElement('option');
+                    option.tabIndex = 0;
+                    option.className = "select-item";
+                    option.value = el;
+                    option.innerHTML = tab[el];
+                    option.addEventListener('change', () => {
+                        console.log(el)
+                    })
+
+                    select.appendChild(option);
+                }
+                section.appendChild(label);
+                section.appendChild(select);
+            return section;
         }
 
         this.displayArtistNameInForm = () => {
