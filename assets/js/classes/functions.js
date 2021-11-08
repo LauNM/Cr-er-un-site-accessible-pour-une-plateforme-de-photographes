@@ -1,5 +1,3 @@
-import { Lightbox } from "../lightbox.js";
-
 export let filteredData = [];
 export const infoList = [];
 export let selectedTag = [];

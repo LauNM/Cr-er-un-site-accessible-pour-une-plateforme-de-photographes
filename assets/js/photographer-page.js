@@ -4,7 +4,7 @@ import { Media } from "./classes/media.js";
 const popularity = "likes";
 const date = "date";
 const title = "title";
-
+export let fullData = [];
 
 function sortBy(data, option) {
     if (option === popularity) {
@@ -48,7 +48,6 @@ function displayPage(data) {
 
 function renderMedia(data, photographerName) {
 
-    
     const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image, data.video, data.altText, data.tags, data.likes, data.date, data.price);
     //Stock { media } into infoList that is created in classes.js
     infoList.push(media);
@@ -63,16 +62,9 @@ function renderMedia(data, photographerName) {
 
 export function displayAllMedia(medias, option,idPhotographer, photographerName) {
     mediaSection.innerHTML = '';
-    console.log(medias)
     const mediaData = medias.filter(item => item.photographerId === idPhotographer);
     sortBy(mediaData, option);
     mediaData.forEach((item) => { renderMedia(item, photographerName); })   
-}
-export function displayAllFilteredMedia(medias, option, photographerName) {
-    mediaSection.innerHTML = '';
-    console.log(medias)
-    sortBy(medias, option);
-    medias.forEach((item) => { renderMedia(item, photographerName); })   
 }
 
 // THEN
@@ -81,7 +73,6 @@ const formArtistName = document.getElementById("formArtistName");
 const mediaSection = document.getElementById("media-section");
 const priceSection = document.getElementById("dayPrice");
 const totalOfLikes = document.getElementById("totalOfLikes");
-const sortByElement = document.getElementById("sort-by");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 
@@ -90,7 +81,7 @@ fetch('../data.json').then(response => {
 }).then(data => {
     let infos = [...data.photographers];
     let media = [...data.media];
-
+    fullData = media;
     // Get id of photographer in the URL to fetch all media & infos for this photographer
     const idPhotographer = parseInt((new URLSearchParams(window.location.search)).get('id'), 10);
     const [photographerData] = (infos.filter(info => info.id === idPhotographer));
@@ -100,11 +91,7 @@ fetch('../data.json').then(response => {
     const photographerName = photographerData.name;
 
     //Keep media from the wanted photographer thanks to the photographer_id
-    /* const mediaData = media.filter(item => item.photographerId === idPhotographer);
 
-    sortBy(mediaData, title);
-
-    mediaData.forEach((item) => { renderMedia(item, photographerName); })    */
     let op = popularity;
     displayAllMedia(media, op, idPhotographer, photographerName)
 

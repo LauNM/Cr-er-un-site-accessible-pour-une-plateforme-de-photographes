@@ -44,7 +44,7 @@ fetch('./assets/data.json').then(response => {
    
     navTags.appendChild(addTags(tagList));
     responsiveNavTags.appendChild(addTags(tagList));
-    console.log((new URLSearchParams(window.location.search)).get('tag'))
+    //console.log((new URLSearchParams(window.location.search)).get('tag'))
     displayArtistCardList(infos);
     
     
