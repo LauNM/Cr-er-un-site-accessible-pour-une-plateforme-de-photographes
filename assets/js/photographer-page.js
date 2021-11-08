@@ -6,7 +6,7 @@ const date = "date";
 const title = "title";
 
 
-export function sortBy(data, option) {
+function sortBy(data, option) {
     if (option === popularity) {
             data.sort((a, b) => {
             return a[popularity] - b[popularity];
@@ -14,10 +14,8 @@ export function sortBy(data, option) {
     }
     if (option === date) {
         data.sort((a, b) => {
-            console.log(a[date])
             let da = new Date(a[date]),
                 db = new Date(b[date]);
-                
             return da - db;
         });
     }
@@ -50,6 +48,7 @@ function displayPage(data) {
 
 function renderMedia(data, photographerName) {
 
+    
     const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image, data.video, data.altText, data.tags, data.likes, data.date, data.price);
     //Stock { media } into infoList that is created in classes.js
     infoList.push(media);
@@ -59,8 +58,21 @@ function renderMedia(data, photographerName) {
     infoList.forEach((item) => {
         total += item._likes;
     });
-    
     totalOfLikes.innerHTML = total;
+}
+
+export function displayAllMedia(medias, option,idPhotographer, photographerName) {
+    mediaSection.innerHTML = '';
+    console.log(medias)
+    const mediaData = medias.filter(item => item.photographerId === idPhotographer);
+    sortBy(mediaData, option);
+    mediaData.forEach((item) => { renderMedia(item, photographerName); })   
+}
+export function displayAllFilteredMedia(medias, option, photographerName) {
+    mediaSection.innerHTML = '';
+    console.log(medias)
+    sortBy(medias, option);
+    medias.forEach((item) => { renderMedia(item, photographerName); })   
 }
 
 // THEN
@@ -88,11 +100,13 @@ fetch('../data.json').then(response => {
     const photographerName = photographerData.name;
 
     //Keep media from the wanted photographer thanks to the photographer_id
-    const mediaData = media.filter(item => item.photographerId === idPhotographer);
+    /* const mediaData = media.filter(item => item.photographerId === idPhotographer);
 
-    sortBy(mediaData, popularity);
-    mediaData.forEach((item) => { renderMedia(item, photographerName); })   
-    
+    sortBy(mediaData, title);
+
+    mediaData.forEach((item) => { renderMedia(item, photographerName); })    */
+    let op = popularity;
+    displayAllMedia(media, op, idPhotographer, photographerName)
 
 }).catch(err => {
     console.log(err);

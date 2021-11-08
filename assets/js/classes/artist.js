@@ -1,6 +1,8 @@
 import { addTags } from "./functions.js";
 import { infoList } from "./functions.js";
-import { sortBy } from "../photographer-page.js";
+import { displayAllFilteredMedia } from "../photographer-page.js";
+
+
 
 export class Artist {
     constructor(id, portrait, name, city, country, tagline, price, tags) {
@@ -158,12 +160,15 @@ export class Artist {
                     option.className = "select-item";
                     option.value = el;
                     option.innerHTML = tab[el];
-                    option.addEventListener('change', () => {
-                        console.log(el)
-                    })
 
                     select.appendChild(option);
                 }
+                select.addEventListener('click', () => {
+                    
+                    console.log(select.value)
+                   displayAllFilteredMedia(infoList, select.value, this._name)
+                    })
+                    
                 section.appendChild(label);
                 section.appendChild(select);
             return section;
