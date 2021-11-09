@@ -1,5 +1,5 @@
 import { addTags } from "./functions.js";
-import { displayAllMedia, fullData } from "../photographer-page.js";
+import { displayAllFilteredMedia, mediaData } from "../photographer-page.js";
 
 
 
@@ -163,7 +163,7 @@ export class Artist {
                     select.appendChild(option);
                 }
                 select.addEventListener('change', () => {
-                    displayAllMedia(fullData, select.value, this._id, this._name)
+                    displayAllFilteredMedia(mediaData, select.value, this._id, this._name)
                     })
                     
                 section.appendChild(label);

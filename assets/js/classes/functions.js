@@ -1,5 +1,5 @@
 export let filteredData = [];
-export const infoList = [];
+export let infoList = [];
 export let selectedTag = [];
 
 const cardsSection = document.getElementById("cards");
@@ -38,6 +38,49 @@ const filter = (data, tag) => {
         }
     })
     return filteredData;
+}
+
+
+/* FUNCTION TO SORT DATA */
+
+
+function sortByPopularity (data) {
+    data.sort((a, b) => {
+        return a.likes - b.likes;
+    });
+}
+function sortByDate (data) {
+    data.sort((a, b) => {
+        let da = new Date(a.date),
+            db = new Date(b.date);
+        return da - db;
+    });
+}
+function sortByTitle (data) {
+    data.sort((a, b) => {
+        let fa = a.title.toLowerCase(),
+            fb = b.title.toLowerCase();
+    
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    });
+}
+
+export function sortBy(data, option) {
+    if (option === 'likes') {
+            sortByPopularity(data);
+    }
+    if (option === 'date') {
+        sortByDate(data);
+    }
+    if (option === 'title') {
+        sortByTitle(data);
+    }
 }
 
 
