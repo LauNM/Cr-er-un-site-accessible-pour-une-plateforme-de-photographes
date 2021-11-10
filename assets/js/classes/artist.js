@@ -163,7 +163,7 @@ export class Artist {
                     select.appendChild(option);
                 }
                 select.addEventListener('change', () => {
-                    displayAllFilteredMedia(mediaData, select.value, this._id, this._name)
+                    displayAllFilteredMedia(select.value)
                     })
                     
                 section.appendChild(label);

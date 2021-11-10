@@ -1,7 +1,7 @@
-import { addTags, infoList } from "./classes/functions.js";
+import { addTags, infoList} from "./classes/functions.js";
 import { Artist } from "./classes/artist.js";
 
-
+// const infoList = [];
 
 //Create tab with all tags found in data
 const tagsList = (data) => {
@@ -46,6 +46,8 @@ fetch('./assets/data.json').then(response => {
     responsiveNavTags.appendChild(addTags(tagList));
     //console.log((new URLSearchParams(window.location.search)).get('tag'))
     displayArtistCardList(infos);
+
+    
     
     
 }).catch(err => {

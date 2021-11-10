@@ -35,21 +35,16 @@ function displayAllMedia(medias, option,idPhotographer, photographerName) {
     mediaSection.innerHTML = '';
     const mediaData = medias.filter(item => item.photographerId === idPhotographer);
     sortBy(mediaData, option);
+    console.log(mediaData)
     mediaData.forEach((item) => { renderMedia(item, photographerName); })   
 }
 
 
 // probleme avec infolist qui ne se vide pas
-export function displayAllFilteredMedia(medias, option,idPhotographer, photographerName) {
-    
+export function displayAllFilteredMedia(option) {
     mediaSection.innerHTML = '';
-    const mediaData = medias.filter(item => item.photographerId === idPhotographer);
-    sortBy(mediaData, option);
-    console.log(infoList)
-    mediaData.forEach((data) => { 
-        const media = new Media(data.id, data.photographerId, photographerName, data.title,  data.image, data.video, data.altText, data.tags, data.likes, data.date, data.price);
-        //Stock { media } into infoList that is created in classes.js
-        infoList.push(media);
+    sortBy(infoList, option);
+    infoList.forEach((media) => {
         mediaSection.appendChild(media.createMedia()); 
     })   
 }
@@ -78,7 +73,7 @@ fetch('../data.json').then(response => {
 
     //Keep media from the wanted photographer thanks to the photographer_id
 
-    let op = 'popularity';
+    let op = 'likes';
     displayAllMedia(mediaData, op, idPhotographer, photographerName)
 
 }).catch(err => {

@@ -73,7 +73,7 @@ function sortByTitle (data) {
 
 export function sortBy(data, option) {
     if (option === 'likes') {
-            sortByPopularity(data);
+        sortByPopularity(data);
     }
     if (option === 'date') {
         sortByDate(data);

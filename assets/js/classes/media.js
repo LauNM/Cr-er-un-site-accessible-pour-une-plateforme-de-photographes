@@ -17,8 +17,29 @@ export class Media {
         this._price = price;
 
     }
-    getLikes = () => {
+
+    get title() {
+        return this._title;
+    }
+
+    set title(val) {
+        this._title = val;
+    }
+
+    get date() {
+        return this._date;
+    }
+
+    set date(val) {
+        this._date = val;
+    }
+
+    get likes() {
         return this._likes;
+    }
+
+    set likes(val) {
+        this._likes = val;
     }
 
     chooseMediaType = () => {
@@ -57,7 +78,6 @@ export class Media {
         heartIcon.addEventListener('click', () => {
             this._likes += 1;
             numberOfLikes.textContent = this._likes;
-            console.log(infoList)
 
             let total = 0;
             infoList.forEach((item) => {
