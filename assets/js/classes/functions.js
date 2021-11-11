@@ -1,28 +1,58 @@
-export let filteredData = [];
+import { Artist } from "./artist.js";
+import { allData } from "../main.js";
+
+export let newData = [];
 export let infoList = [];
-export let selectedTag = [];
 
 const cardsSection = document.getElementById("cards");
 
-export const addTags = (tags) => {
+const test = () => {
+    window.location = '/';
+}
+
+                                            /* TAGS */
+// CREATE TAG LIST
+
+export const tagsList = (data) => {
+    let tagsTab = [];
+    data.forEach(el => {
+        el.tags.forEach(tag => {
+            if (!tagsTab.includes(tag)) {
+                tagsTab.push(tag)
+            }
+        })
+    })
+    return tagsTab;
+}
+
+// CREATE BUTTON OR LINK FOR TAGS, DEPENDING ON PAGE
+export const addButtonTags = (tags) => {
     const list = document.createElement('ul');
     tags.forEach(tag => {
         const item = document.createElement('li');
         item.className = "tag";
         const link = document.createElement('a');
         link.textContent = `#${tag}`;
-
         link.addEventListener('click', () => {
-            if (window.location.search.length === 0) {
-                cardsSection.innerHTML = '';
-                filteredData = [];
-                filter(infoList, tag)
-            }
-            else {
-                link.href = `/?tag=${tag}`;
-            }
+            cardsSection.innerHTML = '';
+            filteredData(allData, tag).forEach(element => {
+                cardsSection.appendChild(element.createArticleArtist());
+            });
         })
+        item.appendChild(link);
+        list.appendChild(item)
+    })
+    return list;
+};
 
+export const addLinkTags = (tags) => {
+    const list = document.createElement('ul');
+    tags.forEach(tag => {
+        const item = document.createElement('li');
+        item.className = "tag";
+        const link = document.createElement('a');
+        link.textContent = `#${tag}`;
+        link.href = `/?tag=${tag}`;
 
         item.appendChild(link);
         list.appendChild(item)
@@ -30,37 +60,60 @@ export const addTags = (tags) => {
     return list;
 };
 
-const filter = (data, tag) => {
-    data.filter((e) => {
-        if (e._tags.includes(tag)) {
-            cardsSection.appendChild(e.createArticleArtist());
-            filteredData.push(e);
-        }
+// RETURN FILTERED DATA
+const createArtistArray = (data) => {
+    let artistArray = [];
+    data.forEach((element)=> {
+        const artist = new Artist(
+            element.id, 
+            element.portrait, 
+            element.name, 
+            element.city, 
+            element.country, 
+            element.tagline, 
+            element.price, 
+            element.tags
+            );
+        artistArray.push(artist);
     })
-    return filteredData;
+    console.log('artistarray: ', artistArray)
+    return artistArray;
+}
+export const filteredData = (data, tag) => {
+    console.log('is tag: ', tag)
+    if (tag === null) {
+        return createArtistArray(data);
+    }
+    else {
+        newData = [];
+        data.filter((item) => {
+            if (item.tags.includes(tag)) {
+                newData.push(item);
+            }
+        })
+        return createArtistArray(newData);
+    }
 }
 
+// FUNCTION TO SORT DATA 
 
-/* FUNCTION TO SORT DATA */
-
-
-function sortByPopularity (data) {
+function sortByPopularity(data) {
     data.sort((a, b) => {
         return a.likes - b.likes;
     });
 }
-function sortByDate (data) {
+function sortByDate(data) {
     data.sort((a, b) => {
         let da = new Date(a.date),
             db = new Date(b.date);
         return da - db;
     });
 }
-function sortByTitle (data) {
+function sortByTitle(data) {
     data.sort((a, b) => {
         let fa = a.title.toLowerCase(),
             fb = b.title.toLowerCase();
-    
+
         if (fa < fb) {
             return -1;
         }

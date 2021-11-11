@@ -13,7 +13,7 @@ function displayPage(data) {
     artistSection.appendChild(artist.createPage());
     artistSection.appendChild(artist.displaySelectFilter());
     formArtistName.appendChild(artist.displayArtistNameInForm());
-    priceSection.insertAdjacentHTML('beforeend', artist.displayPrice());
+    priceSection.insertAdjacentHTML('beforeend', artist.price);
     
 }
 
