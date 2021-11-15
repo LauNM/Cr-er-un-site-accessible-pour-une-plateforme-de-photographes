@@ -281,7 +281,7 @@ textarea#message {
 #likesAndPrice {
     display: flex;
     justify-content: space-between;
-    width: 376px;
+    min-width: 300px;
     position: fixed;
     bottom:0;
     right: 0;
@@ -292,10 +292,13 @@ textarea#message {
     font-weight: 500;
     margin-right: 36px;
 }
-
-.no-margin{
+.price {
     margin: 0;
 }
+.total-likes {
+    margin: 0 60px 0 0;
+}
+
 
 ul {
     padding: 0;

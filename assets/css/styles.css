@@ -25,7 +25,18 @@
     text-align: center;
 }
 
+.buttonTag {
+    border: none;
+    background: transparent;
+    color: var(--primary-dark);
+    font-weight: bold;
+    cursor: pointer;
+}
 
+.tag:hover > .buttonTag {
+    background-color: var(--primary-dark);
+    color: var(--secondary-light);
+}
 .card-header {
     display: flex;
     flex-direction: column;

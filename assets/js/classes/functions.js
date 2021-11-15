@@ -31,15 +31,16 @@ export const addButtonTags = (tags) => {
     tags.forEach(tag => {
         const item = document.createElement('li');
         item.className = "tag";
-        const link = document.createElement('a');
-        link.textContent = `#${tag}`;
-        link.addEventListener('click', () => {
+        const button = document.createElement('button');
+        button.textContent = `#${tag}`;
+        button.className = "buttonTag";
+        button.addEventListener('click', () => {
             cardsSection.innerHTML = '';
             filteredData(allData, tag).forEach(element => {
                 cardsSection.appendChild(element.createArticleArtist());
             });
         })
-        item.appendChild(link);
+        item.appendChild(button);
         list.appendChild(item)
     })
     return list;
