@@ -35,7 +35,6 @@ function displayAllMedia(medias, option,idPhotographer, photographerName) {
     mediaSection.innerHTML = '';
     const mediaData = medias.filter(item => item.photographerId === idPhotographer);
     sortBy(mediaData, option);
-    console.log(mediaData)
     mediaData.forEach((item) => { renderMedia(item, photographerName); })   
 }
 

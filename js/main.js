@@ -18,7 +18,7 @@ const goToContent = document.getElementById("goToContent");
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 
-fetch('./assets/data.json').then(response => {
+fetch('../data.json').then(response => {
     return response.json();
 }).then(data => {
     let infos = [...data.photographers];

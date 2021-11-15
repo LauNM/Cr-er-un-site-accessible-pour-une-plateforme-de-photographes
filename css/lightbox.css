@@ -18,7 +18,7 @@
 .lightbox__next,
 .lightbox__previous {
     border: none;
-    background: url(../media/rounded-right.svg) center center / 50px 50px no-repeat;
+    background: url(../assets/media/rounded-right.svg) center center / 50px 50px no-repeat;
     width: 50px;
     height: 100%;
     position: fixed;
@@ -39,7 +39,7 @@
     width: 30px;
     height: 30px;
     border: none;
-    background: url(../media/close.svg) center center / 100% 100% no-repeat;
+    background: url(../assets/media/close.svg) center center / 100% 100% no-repeat;
     position: fixed;
     
     top: 20px;

@@ -29,8 +29,8 @@
     border: none;
     background: transparent;
     color: var(--primary-dark);
-    font-weight: bold;
     cursor: pointer;
+    padding: 1px;
 }
 
 .tag:hover > .buttonTag {

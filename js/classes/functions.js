@@ -77,11 +77,9 @@ const createArtistArray = (data) => {
             );
         artistArray.push(artist);
     })
-    console.log('artistarray: ', artistArray)
     return artistArray;
 }
 export const filteredData = (data, tag) => {
-    console.log('is tag: ', tag)
     if (tag === null) {
         return createArtistArray(data);
     }

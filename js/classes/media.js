@@ -125,7 +125,7 @@ class Image extends Media {
     render = () => {
         const image = document.createElement('img');
 
-        image.src = `../media/${this._photographerName}/${this._image}`;
+        image.src = `../assets/media/${this._photographerName}/${this._image}`;
         image.id = this._id;
         image.className = "photo";
         image.tabIndex= "0";
@@ -145,7 +145,7 @@ class Image extends Media {
     renderLightbox = () => {
         const image = document.createElement('img');
 
-        image.src = `../media/${this._photographerName}/${this._image}`;
+        image.src = `../assets//media/${this._photographerName}/${this._image}`;
         image.style.height = "90vh";
         image.id = this._id;
         image.alt = this._altText;
@@ -169,7 +169,7 @@ class Video extends Media {
         video.setAttribute('data-state', 'hidden');
             const source = document.createElement('source');
             source.id = this._id;
-            source.src = `../media/${this._photographerName}/${this._video}`;
+            source.src = `../assets//media/${this._photographerName}/${this._video}`;
             source.type = "video/mp4";
         video.appendChild(source);
 
@@ -184,7 +184,7 @@ class Video extends Media {
         video.style.height = "90vh";
             const source = document.createElement('source');
             source.id = this._id;
-            source.src = `../media/${this._photographerName}/${this._video}`;
+            source.src = `../assets/media/${this._photographerName}/${this._video}`;
             source.type = "video/mp4";
         video.appendChild(source);
 

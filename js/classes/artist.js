@@ -27,14 +27,14 @@ export class Artist {
 
         const a = document.createElement('a');
         a.tabIndex = "0";
-        a.href = `./assets/pages/photographer-page.html?id=${this._id}`;
+        a.href = `./pages/photographer-page.html?id=${this._id}`;
         a.id = `${this._name}`;
 
         const cardHeader = document.createElement('section');
         cardHeader.className = "card-header";
 
         const img = document.createElement('img');
-        img.src = `assets/media/Photographers/${this._portrait}`;
+        img.src = `../assets/media/Photographers/${this._portrait}`;
         img.alt = "ID photo";
         img.className = "id-photo";
 
@@ -122,7 +122,7 @@ export class Artist {
     createIdPhoto = () => {
         const idPhoto = document.createElement('img');
         idPhoto.className = "id-photo";
-        idPhoto.src = `../media/Photographers/${this._portrait}`;
+        idPhoto.src = `../assets/media/Photographers/${this._portrait}`;
         idPhoto.alt = "ID Photo";
 
         return idPhoto;
