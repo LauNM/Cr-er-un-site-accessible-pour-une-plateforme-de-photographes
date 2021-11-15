@@ -12,6 +12,7 @@ function closeModal() {
     document.getElementById('contact-artist-form').style.display = "none";
 }
 closeBtn.addEventListener("click", closeModal);
+closeBtn.addEventListener("keypress", closeModal);
 
 function checkValidity() {
     let isValid = true;

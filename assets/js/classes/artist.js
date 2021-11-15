@@ -1,5 +1,5 @@
 import { addButtonTags, addLinkTags } from "./functions.js";
-import { displayAllFilteredMedia, mediaData } from "../photographer-page.js";
+import { displayAllFilteredMedia } from "../photographer-page.js";
 
 
 

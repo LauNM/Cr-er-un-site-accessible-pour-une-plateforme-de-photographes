@@ -35,6 +35,7 @@ export class Lightbox {
      * @param {KeyboardEvent} e
      */
     onKeyUp (e) {
+        console.log(e)
         if (e.key === 'Escape') {
             this.close(e)
         }

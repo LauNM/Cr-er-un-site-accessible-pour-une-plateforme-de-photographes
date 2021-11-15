@@ -134,6 +134,10 @@ class Image extends Media {
         image.addEventListener('click', (e) => {
 
             new Lightbox(infoList, this._id)
+        }) 
+        image.addEventListener('keypress', (e) => {
+
+            new Lightbox(infoList, this._id)
         })
         return image;
     }

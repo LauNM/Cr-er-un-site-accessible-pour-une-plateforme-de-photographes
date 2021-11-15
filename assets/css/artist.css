@@ -30,26 +30,9 @@
     position: absolute;
     right: 65px;
     top: 40px;
-    opacity: 1;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
-}
-
-.close:before,
-.close:after {
-    position: absolute;
-    left: 15px;
-    content: " ";
-    height: 42px;
-    width: 3px;
-    background-color: #fff;
-}
-
-.close:before {
-    transform: rotate(45deg);
-}
-
-.close:after {
-    transform: rotate(-45deg);
 }
 
 #contact {
@@ -85,7 +68,8 @@
 
 .contact-btn:hover, .contact-btn:focus {
     background: var(--primary-light);
-    color: var(--secondary-dark);
+    color: var(--dark);
+    border: 1px solid var(--secondary-dark);
 }
 
 .content {
@@ -271,7 +255,8 @@ textarea#message {
 
 .text-control {
     margin: 0;
-    padding: 8px 0;
+    padding: 8px;
+    box-sizing: border-box;
     width: 100%;
     border-radius: 8px;
     font-size: 20px;
