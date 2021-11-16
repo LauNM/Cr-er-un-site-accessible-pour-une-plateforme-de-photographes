@@ -1,4 +1,4 @@
-import { infoList, sortBy } from "./classes/functions.js";
+import { infoList, sortBy } from "./functions.js";
 import { Artist } from "./classes/artist.js";
 import { Media } from "./classes/media.js";
 

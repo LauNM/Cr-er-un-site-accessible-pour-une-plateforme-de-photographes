@@ -1,19 +1,15 @@
-import { Artist } from "./artist.js";
-import { allData } from "../main.js";
+import { Artist } from "./classes/artist.js";
+import { allData } from "./main.js";
 
 export let newData = [];
 export let infoList = [];
 
 const cardsSection = document.getElementById("cards");
 
-const test = () => {
-    window.location = '/';
-}
-
                                             /* TAGS */
 // CREATE TAG LIST
 
-export const tagsList = (data) => {
+export const createTagsList = (data) => {
     let tagsTab = [];
     data.forEach(el => {
         el.tags.forEach(tag => {
@@ -26,7 +22,7 @@ export const tagsList = (data) => {
 }
 
 // CREATE BUTTON OR LINK FOR TAGS, DEPENDING ON PAGE
-export const addButtonTags = (tags) => {
+export const createButtonsTag = (tags) => {
     const list = document.createElement('ul');
     tags.forEach(tag => {
         const item = document.createElement('li');
@@ -36,7 +32,7 @@ export const addButtonTags = (tags) => {
         button.className = "buttonTag";
         button.addEventListener('click', () => {
             cardsSection.innerHTML = '';
-            filteredData(allData, tag).forEach(element => {
+            filterDataByTag(allData, tag).forEach(element => {
                 cardsSection.appendChild(element.createArticleArtist());
             });
         })
@@ -46,7 +42,7 @@ export const addButtonTags = (tags) => {
     return list;
 };
 
-export const addLinkTags = (tags) => {
+export const createLinksTag = (tags) => {
     const list = document.createElement('ul');
     tags.forEach(tag => {
         const item = document.createElement('li');
@@ -62,7 +58,7 @@ export const addLinkTags = (tags) => {
 };
 
 // RETURN FILTERED DATA
-const createArtistArray = (data) => {
+const arrayOfArtistData = (data) => {
     let artistArray = [];
     data.forEach((element)=> {
         const artist = new Artist(
@@ -79,9 +75,10 @@ const createArtistArray = (data) => {
     })
     return artistArray;
 }
-export const filteredData = (data, tag) => {
+
+export const filterDataByTag = (data, tag) => {
     if (tag === null) {
-        return createArtistArray(data);
+        return arrayOfArtistData(data);
     }
     else {
         newData = [];
@@ -90,7 +87,7 @@ export const filteredData = (data, tag) => {
                 newData.push(item);
             }
         })
-        return createArtistArray(newData);
+        return arrayOfArtistData(newData);
     }
 }
 

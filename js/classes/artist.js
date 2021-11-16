@@ -1,4 +1,4 @@
-import { addButtonTags, addLinkTags } from "./functions.js";
+import { createButtonsTag, createLinksTag } from "../functions.js";
 import { displayAllFilteredMedia } from "../photographer-page.js";
 
 
@@ -65,7 +65,7 @@ export class Artist {
 
         const cardTags = document.createElement('section');
         cardTags.className = "card-tags";
-        cardTags.appendChild(addButtonTags(this._tags));
+        cardTags.appendChild(createButtonsTag(this._tags));
 
         article.appendChild(a);
         article.appendChild(cardMain);
@@ -95,7 +95,7 @@ export class Artist {
 
         const tags = document.createElement('section');
         tags.className = "tags";
-        tags.appendChild(addLinkTags(this._tags));
+        tags.appendChild(createLinksTag(this._tags));
 
         artistInfoSection.appendChild(artistName);
         artistInfoSection.appendChild(artistMain);

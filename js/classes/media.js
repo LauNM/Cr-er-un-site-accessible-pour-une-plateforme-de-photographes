@@ -1,6 +1,6 @@
 
 import { Lightbox } from "../lightbox.js";
-import { infoList } from "./functions.js";
+import { infoList } from "../functions.js";
 
 export class Media {
     constructor(id, photographerId, photographerName, title, image, video, altText, tags, likes, date, price) {

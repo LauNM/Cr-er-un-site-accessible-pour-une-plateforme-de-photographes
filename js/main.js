@@ -1,4 +1,4 @@
-import { addButtonTags, filteredData, tagsList } from "./classes/functions.js";
+import { createButtonsTag, filterDataByTag, createTagsList } from "./functions.js";
 
 function displayGoTo() {
     let y = window.scrollY;
@@ -24,16 +24,16 @@ fetch('../data.json').then(response => {
     let infos = [...data.photographers];
     allData = [...infos];
     // create buttons for each tag in navbar
-    const tagList = tagsList(infos);
-    navTags.appendChild(addButtonTags(tagList));
-    responsiveNavTags.appendChild(addButtonTags(tagList));
+    const tagList = createTagsList(infos);
+    navTags.appendChild(createButtonsTag(tagList));
+    responsiveNavTags.appendChild(createButtonsTag(tagList));
 
     // get tag in url if exist
     let tag = new URLSearchParams(window.location.search).get('tag')
     
     // filter data
 
-    filteredData(infos, tag).forEach(element => {
+    filterDataByTag(infos, tag).forEach(element => {
         cardsSection.appendChild(element.createArticleArtist());
     });
 
