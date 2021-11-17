@@ -42,28 +42,13 @@ export class Media {
         this._likes = val;
     }
 
-    chooseMediaType = () => {
-        if (this._image) {
-            return new Image(this._id, this._photographerName, this._image, this._altText);
-        }
-        if (this._video) {
-            return new Video(this._id, this._photographerName, this._video, this._altText);
-        }
-    }
+   /*
 
-    createMedia = () => {
+    ARTIST PAGE
+    functions to create article of media
 
-        const article = document.createElement("article");
-        article.id = this._id;
-        article.className = "artist-media";
-
-        const mediaInfo = document.createElement("div");
-        mediaInfo.className = "media-infos";
-
-        const title = document.createElement("p");
-        title.className = "media-title";
-        title.textContent = this._title;
-
+    */
+    createLikesMediaSection = () => {
         const likeSection = document.createElement("span");
         likeSection.className = "likes-section";
 
@@ -84,7 +69,7 @@ export class Media {
                 total += item._likes;
             });
 
-            document.querySelector("#totalOfLikes").innerHTML = total;
+            document.querySelector("#number-total-likes").innerHTML = total;
 
         });
         heartIcon.addEventListener('keypress', () => {
@@ -97,12 +82,34 @@ export class Media {
                 total += item._likes;
             });
 
-            document.querySelector("#totalOfLikes").innerHTML = total;
+            document.querySelector("#number-total-likes").innerHTML = total;
         });
+
         likeSection.appendChild(numberOfLikes);
         likeSection.appendChild(heartIcon);
+        return likeSection;
+    }
+
+    // CREATE GLOBAL ARTICLE FOR MEDIA
+
+    createArticleMedia = () => {
+
+        const article = document.createElement("article");
+        article.id = this._id;
+        article.className = "artist-media";
+
+        const mediaInfo = document.createElement("div");
+        mediaInfo.className = "media-infos";
+
+        const title = document.createElement("p");
+        title.className = "media-title";
+        title.textContent = this._title;
+
+        const likeSection = document.createElement("span");
+        likeSection.className = "likes-section";
+
         mediaInfo.appendChild(title);
-        mediaInfo.appendChild(likeSection);
+        mediaInfo.appendChild(this.createLikesMediaSection());
 
         const mediaType = this.chooseMediaType();
         article.appendChild(mediaType.render())
@@ -111,6 +118,16 @@ export class Media {
         return article;
     }
 
+    // DEPENDING ON MEDIA TYPE, CREATION OF NEW IMAGE OR NEW VIDEO
+    
+    chooseMediaType = () => {
+        if (this._image) {
+            return new Image(this._id, this._photographerName, this._image, this._altText);
+        }
+        if (this._video) {
+            return new Video(this._id, this._photographerName, this._video, this._altText);
+        }
+    }
 }
 
 class Image extends Media {
@@ -143,23 +160,33 @@ class Image extends Media {
     }
 
     renderLightbox = () => {
+        const wrapper = document.createElement('div');
+        wrapper.className = "mediaWrapper";
         const image = document.createElement('img');
 
         image.src = `../assets//media/${this._photographerName}/${this._image}`;
-        image.style.height = "90vh";
+        image.className = "lightbox-media";
         image.id = this._id;
         image.alt = this._altText;
 
-        return image;
+        const title = document.createElement('p');
+        title.innerHTML = this._altText;
+        title.className = "lightbox-media-title";
+    
+        wrapper.appendChild(image);
+        wrapper.appendChild(title);
+
+        return wrapper;
     }
 }
 
 class Video extends Media {
-    constructor(id, photographerName, video) {
+    constructor(id, photographerName, video, altText) {
         super()
         this._id = id;
         this._photographerName = photographerName;
         this._video = video;
+        this._altText = altText;
 
     }
     render = () => {
@@ -179,15 +206,24 @@ class Video extends Media {
         return video;
     }
     renderLightbox = () => {
+        const wrapper = document.createElement('div');
+        wrapper.className = "mediaWrapper";
         const video = document.createElement('video');
         video.autoplay = true;
-        video.style.height = "90vh";
+        video.className = "lightbox-media";
             const source = document.createElement('source');
             source.id = this._id;
             source.src = `../assets/media/${this._photographerName}/${this._video}`;
             source.type = "video/mp4";
         video.appendChild(source);
 
-        return video;
+        const title = document.createElement('p');
+        title.className = "lightbox-media-title";
+        title.innerHTML = this._altText;
+        
+        wrapper.appendChild(video);
+        wrapper.appendChild(title);
+
+        return wrapper;
     }
 }

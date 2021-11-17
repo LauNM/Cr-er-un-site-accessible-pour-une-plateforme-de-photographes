@@ -1,5 +1,4 @@
-import { createButtonsTag, createLinksTag } from "../functions.js";
-import { displayAllFilteredMedia } from "../photographer-page.js";
+import { createButtonsTag, createLinksTag, displayAllFilteredMedia } from "../functions.js";
 
 
 
@@ -17,19 +16,33 @@ export class Artist {
     get tags() {
         return this._tags;
     }
+    set tags(value) {
+        this._tags = value;
+    }
 
     get price() {
-        return this._price;    }
+        return this._price;
+    }
+    set price(value) {
+        this._price = value;
+    }
+  
+    /*
 
-    createArticleArtist = () => {
-        const article = document.createElement('article');
-        article.className = "photographer-description";
+    HOME PAGE
+    functions to create parts of artist article 
 
+     */
+    createLinkToArtistPage = () => {
         const a = document.createElement('a');
         a.tabIndex = "0";
         a.href = `./pages/photographer-page.html?id=${this._id}`;
         a.id = `${this._name}`;
+        a.appendChild(this.createCardHeader());
 
+        return a;
+    }
+    createCardHeader = () => {
         const cardHeader = document.createElement('section');
         cardHeader.className = "card-header";
 
@@ -43,8 +56,9 @@ export class Artist {
 
         cardHeader.appendChild(img);
         cardHeader.appendChild(name);
-        a.appendChild(cardHeader);
-
+        return cardHeader;
+    }
+    createCardMain = () => {
         const cardMain = document.createElement('section');
         cardMain.className = "card-main";
 
@@ -63,18 +77,37 @@ export class Artist {
         cardMain.appendChild(description);
         cardMain.appendChild(price);
 
-        const cardTags = document.createElement('section');
-        cardTags.className = "card-tags";
-        cardTags.appendChild(createButtonsTag(this._tags));
+        return cardMain;
+    }
 
-        article.appendChild(a);
-        article.appendChild(cardMain);
-        article.appendChild(cardTags);
+    createTagSection = () => {
+        const tagsSection = document.createElement('section');
+        tagsSection.className = "card-tags";
+        tagsSection.appendChild(createButtonsTag(this._tags));
+
+        return tagsSection;
+    }
+
+    // CREATION OF GLOBAL ARTIST ARTICLE FOR HOME PAGE
+
+    createArtistCard = () => {
+        const article = document.createElement('article');
+        article.className = "photographer-description";
+
+        article.appendChild(this.createLinkToArtistPage());
+        article.appendChild(this.createCardMain());
+        article.appendChild(this.createTagSection());
 
         return article;
     }
+    
+    /*
 
-    createArtistInfo = () => {
+        ARTIST PAGE
+        functions to create parts of artist article 
+
+     */
+    createArtistInformations = () => {
         const artistInfoSection = document.createElement('section');
         artistInfoSection.className = "artist-infos";
 
@@ -93,19 +126,19 @@ export class Artist {
         artistMain.appendChild(localisation);
         artistMain.appendChild(description);
 
-        const tags = document.createElement('section');
-        tags.className = "tags";
-        tags.appendChild(createLinksTag(this._tags));
+        const tagsSection = document.createElement('section');
+        tagsSection.className = "tags";
+        tagsSection.appendChild(createLinksTag(this._tags));
 
         artistInfoSection.appendChild(artistName);
         artistInfoSection.appendChild(artistMain);
-        artistInfoSection.appendChild(tags);
+        artistInfoSection.appendChild(tagsSection);
         return artistInfoSection;
     }
 
     createButtonContact = () => {
         const contactSection = document.createElement('section');
-        contactSection.className = "button";
+        contactSection.className = "contact";
         const contactBtn = document.createElement('button');
         contactBtn.className = "contact-btn";
         contactBtn.id = "contact-this-artist";
@@ -120,28 +153,32 @@ export class Artist {
     }
 
     createIdPhoto = () => {
+        const imageWrapper = document.createElement('section');
+        imageWrapper.className = "image-wrapper";
         const idPhoto = document.createElement('img');
         idPhoto.className = "id-photo";
         idPhoto.src = `../assets/media/Photographers/${this._portrait}`;
         idPhoto.alt = "ID Photo";
+        imageWrapper.appendChild(idPhoto)
 
-        return idPhoto;
+        return imageWrapper;
     }
 
-    createPage = () => {
-        const artistHeader = document.createElement('div');
-        artistHeader.className = "artist-header";
+    // CREATION OF GLOBAL ARTIST PRESENTATION FOR ARTIST PAGE
+    createArtistPagePresentation = () => {
         const artistPresentation = document.createElement('div');
         artistPresentation.className = "artist-presentation";
-        artistPresentation.appendChild(this.createArtistInfo());
+        artistPresentation.appendChild(this.createArtistInformations());
         artistPresentation.appendChild(this.createButtonContact());
-        artistHeader.appendChild(artistPresentation);
-        artistHeader.appendChild(this.createIdPhoto());
+        artistPresentation.appendChild(this.createIdPhoto());
 
-        return artistHeader;
+        return artistPresentation;
     }
 
-    displaySelectFilter = () => {
+
+    //CREATE SORTING DATA BUTTON
+
+    createSortingDataButton = () => {
         const tab = {
             likes : 'Popularité',
             date : 'Date',
@@ -151,7 +188,7 @@ export class Artist {
         section.className = 'artist-main';
             const label = document.createElement('label');
             label.for = "sort-by";
-            label.innerHTML = "Trier par :";
+            label.innerHTML = "Trier par ";
 
             const select = document.createElement('select');
             select.tabIndex = 0;
@@ -169,7 +206,7 @@ export class Artist {
                 select.appendChild(option);
             }
             select.addEventListener('change', () => {
-                displayAllFilteredMedia(select.value)
+                displayAllFilteredMedia(infoList, select.value)
                 })
                 
             section.appendChild(label);
@@ -177,6 +214,9 @@ export class Artist {
         return section;
     }
 
+
+
+    // DISPLAY ARTIST NAME IN FORM
     displayArtistNameInForm = () => {
         const span = document.createElement('span');
         span.textContent = this._name;

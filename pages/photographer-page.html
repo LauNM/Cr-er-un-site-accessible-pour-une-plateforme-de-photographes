@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap"
           rel="stylesheet">
-          <script type="module" src="../js/lightbox.js" defer></script>
     <title>FishEye</title>
 </head>
 
@@ -24,17 +23,17 @@
     </a>
 </header>
 <main>
-    <div id="artist"></div>
+    <div id="artist-header"></div>
     <div id="contact-artist-form">
         <div class="content">
             <button class="close">
-                <img src="../assets/media/close.svg">
+                <i class="fas fa-times fa-3x"></i>
             </button>
             <h1 class="dark">Contactez-moi</h1>
             <p class="dark subtitle" id="formArtistName"></p>
             
             <form
-                    id="contact"
+                    id="contact-form"
                     name="contact"
                     method="post"
             >
@@ -79,21 +78,22 @@
            
         </div>
     </div>
-    <div class="medias" id="media-section"></div>
+    <div id="artist-main" class="medias"></div>
 
-    <span id="likesAndPrice">
+    <span id="artist-footer">
         <p class="total-likes">
-            <span id="totalOfLikes"></span>
+            <span id="number-total-likes"></span>
             <i class="fas fa-heart"></i>
         </p>
         <p class="price">
-            <span id="dayPrice"></span>€ / jour
+            <span id="day-price"></span>€ / jour
         </p>
     </span>
 </main>
 
 <script type="module" src="../js/photographer-page.js"></script>
 <script type="module" src="../js/form.js"></script>
+<script type="module" src="../js/lightbox.js"></script>
 <script src="https://kit.fontawesome.com/85f6025f98.js" crossorigin="anonymous"></script>
 </body>
 

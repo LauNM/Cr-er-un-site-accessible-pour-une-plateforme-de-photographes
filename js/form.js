@@ -1,5 +1,5 @@
 const formData = document.querySelectorAll(".formData");
-const form = document.getElementById('contact');
+const form = document.getElementById('contact-form');
 const closeBtn = document.querySelector(".close");
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');

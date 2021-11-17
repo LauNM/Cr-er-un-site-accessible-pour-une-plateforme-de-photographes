@@ -34,7 +34,7 @@ fetch('../data.json').then(response => {
     // filter data
 
     filterDataByTag(infos, tag).forEach(element => {
-        cardsSection.appendChild(element.createArticleArtist());
+        cardsSection.appendChild(element.createArtistCard());
     });
 
     window.addEventListener("scroll", displayGoTo);

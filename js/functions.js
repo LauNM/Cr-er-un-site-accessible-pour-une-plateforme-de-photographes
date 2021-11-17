@@ -33,7 +33,7 @@ export const createButtonsTag = (tags) => {
         button.addEventListener('click', () => {
             cardsSection.innerHTML = '';
             filterDataByTag(allData, tag).forEach(element => {
-                cardsSection.appendChild(element.createArticleArtist());
+                cardsSection.appendChild(element.createArtistCard());
             });
         })
         item.appendChild(button);
@@ -130,6 +130,24 @@ export function sortBy(data, option) {
     if (option === 'title') {
         sortByTitle(data);
     }
+}
+
+export function displayAllFilteredMedia(data, option) {
+    mediaSection.innerHTML = '';
+    sortBy(data, option);
+    data.forEach((media) => {
+        mediaSection.appendChild(media.createArticleMedia()); 
+    })   
+}
+
+
+export const calculeTotalOfLikes = (data) => {
+    let total = 0;
+    data.forEach((item) => {
+        total += item._likes;
+    });
+    //numberTotalLikes.innerHTML = total;
+    return total;
 }
 
 

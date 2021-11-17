@@ -27,7 +27,7 @@ export class Lightbox {
 
         const mediaSelected = this._tab[index];
         const renderMedia = mediaSelected.chooseMediaType().renderLightbox();
-        this.buildMedia(renderMedia)
+        this.buildMedia(renderMedia);
     }
 
     /**
@@ -35,7 +35,6 @@ export class Lightbox {
      * @param {KeyboardEvent} e
      */
     onKeyUp (e) {
-        console.log(e)
         if (e.key === 'Escape') {
             this.close(e)
         }
@@ -96,12 +95,21 @@ export class Lightbox {
 
             const buttonClose = document.createElement('button');
             buttonClose.className = "lightbox__close";
+            const closeIcon = document.createElement('i');
+            closeIcon.className = "fas fa-times fa-3x lightbox-icon";
+            buttonClose.appendChild(closeIcon);
 
             const buttonNext = document.createElement('button');
             buttonNext.className = "lightbox__next";
+            const nextIcon = document.createElement('i');
+            nextIcon.className = "fas fa-chevron-right fa-3x lightbox-icon";
+            buttonNext.appendChild(nextIcon);
 
             const buttonPrevious = document.createElement('button');
             buttonPrevious.className = "lightbox__previous";
+            const previousIcon = document.createElement('i');
+            previousIcon.className = "fas fa-chevron-left fa-3x lightbox-icon";
+            buttonPrevious.appendChild(previousIcon);
 
             const container = document.createElement('div');
             container.className = "lightbox__container";
@@ -112,9 +120,9 @@ export class Lightbox {
         dom.appendChild(buttonPrevious);
         dom.appendChild(container);
 
-        dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this))
-        dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this))
-        dom.querySelector('.lightbox__previous').addEventListener('click', this.previous.bind(this))
+        buttonClose.addEventListener('click', this.close.bind(this))
+        buttonNext.addEventListener('click', this.next.bind(this))
+        buttonPrevious.addEventListener('click', this.previous.bind(this))
         return dom;
     }
 
