@@ -5,6 +5,7 @@ export let newData = [];
 export let infoList = [];
 
 const cardsSection = document.getElementById("cards");
+const mediaSection = document.getElementById("artist-main");
 
                                             /* TAGS */
 // CREATE TAG LIST
@@ -27,6 +28,7 @@ export const createButtonsTag = (tags) => {
     tags.forEach(tag => {
         const item = document.createElement('li');
         item.className = "tag";
+        item.ariaLabel = "Tag";
         const button = document.createElement('button');
         button.textContent = `#${tag}`;
         button.className = "buttonTag";
@@ -47,6 +49,7 @@ export const createLinksTag = (tags) => {
     tags.forEach(tag => {
         const item = document.createElement('li');
         item.className = "tag";
+        item.ariaLabel = "Tag";
         const link = document.createElement('a');
         link.textContent = `#${tag}`;
         link.href = `/?tag=${tag}`;

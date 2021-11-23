@@ -75,8 +75,6 @@ export class Media {
         heartIcon.addEventListener('keypress', () => {
             this._likes += 1;
             numberOfLikes.textContent = this._likes;
-            console.log(infoList)
-
             let total = 0;
             infoList.forEach((item) => {
                 total += item._likes;
@@ -148,11 +146,11 @@ class Image extends Media {
         image.tabIndex= "0";
         image.alt = this._altText;
 
-        image.addEventListener('click', (e) => {
+        image.addEventListener('click', () => {
 
             new Lightbox(infoList, this._id)
         }) 
-        image.addEventListener('keypress', (e) => {
+        image.addEventListener('keypress', () => {
 
             new Lightbox(infoList, this._id)
         })
@@ -200,7 +198,7 @@ class Video extends Media {
             source.type = "video/mp4";
         video.appendChild(source);
 
-        video.addEventListener('click', (e) => {
+        video.addEventListener('click', () => {
             new Lightbox( infoList, this._id)
         })
         return video;

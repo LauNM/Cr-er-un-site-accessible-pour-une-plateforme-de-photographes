@@ -1,0 +1,22 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LauNM/LaurieBeduneau_6_16092021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LauNM/LaurieBeduneau_6_16092021/issues"
+  },
+  "homepage": "https://github.com/LauNM/LaurieBeduneau_6_16092021#readme",
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  }
+}

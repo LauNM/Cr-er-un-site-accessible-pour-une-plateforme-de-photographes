@@ -224,7 +224,7 @@ li {
 
 } */
 
-select#sort-by {
+select#order-by {
     font-size: 18px;
     color: var(--secondary-light);
     background-color: var(--primary-dark);

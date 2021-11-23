@@ -1,4 +1,4 @@
-import { createButtonsTag, createLinksTag, displayAllFilteredMedia } from "../functions.js";
+import { infoList, createButtonsTag, createLinksTag, displayAllFilteredMedia } from "../functions.js";
 
 
 
@@ -38,6 +38,7 @@ export class Artist {
         a.tabIndex = "0";
         a.href = `./pages/photographer-page.html?id=${this._id}`;
         a.id = `${this._name}`;
+        a.ariaLabel = this._name;
         a.appendChild(this.createCardHeader());
 
         return a;
@@ -45,10 +46,11 @@ export class Artist {
     createCardHeader = () => {
         const cardHeader = document.createElement('section');
         cardHeader.className = "card-header";
+        cardHeader.ariaLabel = this._name;
 
         const img = document.createElement('img');
         img.src = `../assets/media/Photographers/${this._portrait}`;
-        img.alt = "ID photo";
+        img.alt = "";
         img.className = "id-photo";
 
         const name = document.createElement('h2');
@@ -141,6 +143,7 @@ export class Artist {
         contactSection.className = "contact";
         const contactBtn = document.createElement('button');
         contactBtn.className = "contact-btn";
+        contactBtn.ariaLabel = "Contact me";
         contactBtn.id = "contact-this-artist";
         contactBtn.tabIndex = "0";
         contactBtn.textContent = "Contactez-moi";
@@ -158,7 +161,7 @@ export class Artist {
         const idPhoto = document.createElement('img');
         idPhoto.className = "id-photo";
         idPhoto.src = `../assets/media/Photographers/${this._portrait}`;
-        idPhoto.alt = "ID Photo";
+        idPhoto.alt = this._name;
         imageWrapper.appendChild(idPhoto)
 
         return imageWrapper;
@@ -187,13 +190,14 @@ export class Artist {
         const section = document.createElement('section');
         section.className = 'artist-main';
             const label = document.createElement('label');
-            label.for = "sort-by";
+            label.for = "order-by";
             label.innerHTML = "Trier par ";
 
             const select = document.createElement('select');
             select.tabIndex = 0;
-            select.name = "sort";
-            select.id = "sort-by";
+            select.ariaLabel = "Order By";
+            select.name = "order-by";
+            select.id = "order-by";
             
 
             for(let el in tab){

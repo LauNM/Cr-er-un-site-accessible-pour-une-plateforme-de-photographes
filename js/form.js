@@ -6,7 +6,7 @@ const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const message = document.getElementById('message');
 const submit = document.getElementById('submitFormBtn');
-const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 function closeModal() {
     document.getElementById('contact-artist-form').style.display = "none";
@@ -59,9 +59,9 @@ function submitForm(event) {
         form.reset();
         console.log(results);
         closeModal();
-    } else {
+    } /* else {
         return false;
-    }
+    } */
 }
 
 submit.addEventListener("click", submitForm);
