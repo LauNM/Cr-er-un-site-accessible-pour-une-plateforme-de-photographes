@@ -1,4 +1,4 @@
-import { infoList, createButtonsTag, createLinksTag, displayAllFilteredMedia } from "../functions.js";
+import { infoList, createLinksTag, displayAllFilteredMedia } from "../functions.js";
 
 
 
@@ -26,7 +26,7 @@ export class Artist {
     set price(value) {
         this._price = value;
     }
-  
+
     /*
 
     HOME PAGE
@@ -82,14 +82,6 @@ export class Artist {
         return cardMain;
     }
 
-    createTagSection = () => {
-        const tagsSection = document.createElement('section');
-        tagsSection.className = "card-tags";
-        tagsSection.appendChild(createButtonsTag(this._tags));
-
-        return tagsSection;
-    }
-
     // CREATION OF GLOBAL ARTIST ARTICLE FOR HOME PAGE
 
     createArtistCard = () => {
@@ -98,11 +90,10 @@ export class Artist {
 
         article.appendChild(this.createLinkToArtistPage());
         article.appendChild(this.createCardMain());
-        article.appendChild(this.createTagSection());
 
         return article;
     }
-    
+
     /*
 
         ARTIST PAGE
@@ -183,38 +174,38 @@ export class Artist {
 
     createSortingDataButton = () => {
         const tab = {
-            likes : 'Popularité',
-            date : 'Date',
-            title : 'Titre'
+            likes: 'Popularité',
+            date: 'Date',
+            title: 'Titre'
         }
         const section = document.createElement('section');
         section.className = 'artist-main';
-            const label = document.createElement('label');
-            label.for = "order-by";
-            label.innerHTML = "Trier par ";
+        const label = document.createElement('label');
+        label.for = "order-by";
+        label.innerHTML = "Trier par ";
 
-            const select = document.createElement('select');
-            select.tabIndex = 0;
-            select.ariaLabel = "Order By";
-            select.name = "order-by";
-            select.id = "order-by";
-            
+        const select = document.createElement('select');
+        select.tabIndex = 0;
+        select.ariaLabel = "Order By";
+        select.name = "order-by";
+        select.id = "order-by";
 
-            for(let el in tab){
-                const option = document.createElement('option');
-                option.tabIndex = 0;
-                option.className = "select-item";
-                option.value = el;
-                option.innerHTML = tab[el];
 
-                select.appendChild(option);
-            }
-            select.addEventListener('change', () => {
-                displayAllFilteredMedia(infoList, select.value)
-                })
-                
-            section.appendChild(label);
-            section.appendChild(select);
+        for (let el in tab) {
+            const option = document.createElement('option');
+            option.tabIndex = 0;
+            option.className = "select-item";
+            option.value = el;
+            option.innerHTML = tab[el];
+
+            select.appendChild(option);
+        }
+        select.addEventListener('change', () => {
+            displayAllFilteredMedia(infoList, select.value)
+        })
+
+        section.appendChild(label);
+        section.appendChild(select);
         return section;
     }
 

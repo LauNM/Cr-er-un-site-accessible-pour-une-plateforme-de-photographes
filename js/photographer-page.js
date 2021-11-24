@@ -1,9 +1,10 @@
 import { infoList, sortBy, calculeTotalOfLikes } from "./functions.js";
 import { Artist } from "./classes/artist.js";
 import { Media } from "./classes/media.js";
+import { getPhotographersData, getMediaData } from "./data.js";
 
-let infos = [];
-export let mediaData = [];
+/* let photographersData = [];
+let mediaData = []; */
 // THEN
 const artistSection = document.getElementById("artist-header");
 const formArtistName = document.getElementById("formArtistName");
@@ -50,9 +51,9 @@ function renderMedia(data, photographerName) {
 
 function displayAllMedia(medias, option,idPhotographer, photographerName) {
     mediaSection.innerHTML = '';
-    const mediaData = medias.filter(item => item.photographerId === idPhotographer);
-    sortBy(mediaData, option);
-    mediaData.forEach((item) => { 
+    const filteredMedia = medias.filter(item => item.photographerId === idPhotographer);
+    sortBy(filteredMedia, option);
+    filteredMedia.forEach((item) => { 
         const media = renderMedia(item, photographerName);
         infoList.push(media);
         mediaSection.appendChild(media.createArticleMedia());
@@ -61,24 +62,19 @@ function displayAllMedia(medias, option,idPhotographer, photographerName) {
 }
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
+async function init() {
+    const { photographers } = await getPhotographersData();
+    const { media } = await getMediaData();
 
-fetch('../data.json').then(response => {
-    return response.json();
-}).then(data => {
-    infos = [...data.photographers];
-    mediaData = [...data.media];
-    
     // Get id of photographer in the URL to fetch all media & infos for this photographer
     const idPhotographer = parseInt((new URLSearchParams(window.location.search)).get('id'), 10);
-    const [photographerData] = (infos.filter(info => info.id === idPhotographer));
+    const [photographerData] = (photographers.filter(data => data.id === idPhotographer));
 
     displayStaticContent(photographerData);
 
     const photographerName = photographerData.name;
 
     let option = 'likes';
-    displayAllMedia(mediaData, option, idPhotographer, photographerName)
-
-}).catch(err => {
-    console.log(err);
-});
+    displayAllMedia(media, option, idPhotographer, photographerName)
+}
+init();

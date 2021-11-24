@@ -42,12 +42,12 @@ export class Media {
         this._likes = val;
     }
 
-   /*
-
-    ARTIST PAGE
-    functions to create article of media
-
-    */
+    /*
+ 
+     ARTIST PAGE
+     functions to create article of media
+ 
+     */
     createLikesMediaSection = () => {
         const likeSection = document.createElement("span");
         likeSection.className = "likes-section";
@@ -117,7 +117,7 @@ export class Media {
     }
 
     // DEPENDING ON MEDIA TYPE, CREATION OF NEW IMAGE OR NEW VIDEO
-    
+
     chooseMediaType = () => {
         if (this._image) {
             return new Image(this._id, this._photographerName, this._image, this._altText);
@@ -143,13 +143,13 @@ class Image extends Media {
         image.src = `../assets/media/${this._photographerName}/${this._image}`;
         image.id = this._id;
         image.className = "photo";
-        image.tabIndex= "0";
+        image.tabIndex = "0";
         image.alt = this._altText;
 
         image.addEventListener('click', () => {
 
             new Lightbox(infoList, this._id)
-        }) 
+        })
         image.addEventListener('keypress', () => {
 
             new Lightbox(infoList, this._id)
@@ -170,7 +170,7 @@ class Image extends Media {
         const title = document.createElement('p');
         title.innerHTML = this._altText;
         title.className = "lightbox-media-title";
-    
+
         wrapper.appendChild(image);
         wrapper.appendChild(title);
 
@@ -192,14 +192,14 @@ class Video extends Media {
         video.tabIndex = "0";
         video.className = "video";
         video.setAttribute('data-state', 'hidden');
-            const source = document.createElement('source');
-            source.id = this._id;
-            source.src = `../assets//media/${this._photographerName}/${this._video}`;
-            source.type = "video/mp4";
+        const source = document.createElement('source');
+        source.id = this._id;
+        source.src = `../assets//media/${this._photographerName}/${this._video}`;
+        source.type = "video/mp4";
         video.appendChild(source);
 
         video.addEventListener('click', () => {
-            new Lightbox( infoList, this._id)
+            new Lightbox(infoList, this._id)
         })
         return video;
     }
@@ -209,16 +209,16 @@ class Video extends Media {
         const video = document.createElement('video');
         video.autoplay = true;
         video.className = "lightbox-media";
-            const source = document.createElement('source');
-            source.id = this._id;
-            source.src = `../assets/media/${this._photographerName}/${this._video}`;
-            source.type = "video/mp4";
+        const source = document.createElement('source');
+        source.id = this._id;
+        source.src = `../assets/media/${this._photographerName}/${this._video}`;
+        source.type = "video/mp4";
         video.appendChild(source);
 
         const title = document.createElement('p');
         title.className = "lightbox-media-title";
         title.innerHTML = this._altText;
-        
+
         wrapper.appendChild(video);
         wrapper.appendChild(title);
 

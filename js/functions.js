@@ -1,13 +1,10 @@
 import { Artist } from "./classes/artist.js";
-import { allData } from "./main.js";
 
-export let newData = [];
 export let infoList = [];
 
-const cardsSection = document.getElementById("cards");
 const mediaSection = document.getElementById("artist-main");
 
-                                            /* TAGS */
+/* TAGS */
 // CREATE TAG LIST
 
 export const createTagsList = (data) => {
@@ -21,28 +18,6 @@ export const createTagsList = (data) => {
     })
     return tagsTab;
 }
-
-// CREATE BUTTON OR LINK FOR TAGS, DEPENDING ON PAGE
-export const createButtonsTag = (tags) => {
-    const list = document.createElement('ul');
-    tags.forEach(tag => {
-        const item = document.createElement('li');
-        item.className = "tag";
-        item.ariaLabel = "Tag";
-        const button = document.createElement('button');
-        button.textContent = `#${tag}`;
-        button.className = "buttonTag";
-        button.addEventListener('click', () => {
-            cardsSection.innerHTML = '';
-            filterDataByTag(allData, tag).forEach(element => {
-                cardsSection.appendChild(element.createArtistCard());
-            });
-        })
-        item.appendChild(button);
-        list.appendChild(item)
-    })
-    return list;
-};
 
 export const createLinksTag = (tags) => {
     const list = document.createElement('ul');
@@ -63,17 +38,17 @@ export const createLinksTag = (tags) => {
 // RETURN FILTERED DATA
 const arrayOfArtistData = (data) => {
     let artistArray = [];
-    data.forEach((element)=> {
+    data.forEach((element) => {
         const artist = new Artist(
-            element.id, 
-            element.portrait, 
-            element.name, 
-            element.city, 
-            element.country, 
-            element.tagline, 
-            element.price, 
+            element.id,
+            element.portrait,
+            element.name,
+            element.city,
+            element.country,
+            element.tagline,
+            element.price,
             element.tags
-            );
+        );
         artistArray.push(artist);
     })
     return artistArray;
@@ -84,7 +59,7 @@ export const filterDataByTag = (data, tag) => {
         return arrayOfArtistData(data);
     }
     else {
-        newData = [];
+        let newData = [];
         data.filter((item) => {
             if (item.tags.includes(tag)) {
                 newData.push(item);
@@ -139,8 +114,8 @@ export function displayAllFilteredMedia(data, option) {
     mediaSection.innerHTML = '';
     sortBy(data, option);
     data.forEach((media) => {
-        mediaSection.appendChild(media.createArticleMedia()); 
-    })   
+        mediaSection.appendChild(media.createArticleMedia());
+    })
 }
 
 
@@ -149,7 +124,6 @@ export const calculeTotalOfLikes = (data) => {
     data.forEach((item) => {
         total += item._likes;
     });
-    //numberTotalLikes.innerHTML = total;
     return total;
 }
 

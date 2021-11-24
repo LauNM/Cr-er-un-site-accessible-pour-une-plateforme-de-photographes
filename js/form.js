@@ -8,11 +8,18 @@ const message = document.getElementById('message');
 const submit = document.getElementById('submitFormBtn');
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+
 function closeModal() {
     document.getElementById('contact-artist-form').style.display = "none";
 }
+
 closeBtn.addEventListener("click", closeModal);
-closeBtn.addEventListener("keypress", closeModal);
+window.addEventListener("keydown", function (e) {
+    console.log(e.key)
+    if (e.key === 'Escape') {
+        closeModal()
+    }
+});
 
 function checkValidity() {
     let isValid = true;
@@ -46,7 +53,6 @@ function checkValidity() {
 
 function submitForm(event) {
     event.preventDefault();
-
     formData.forEach(el => el.setAttribute('data-error-visible', 'false'));
 
     if (checkValidity()) {
@@ -59,9 +65,7 @@ function submitForm(event) {
         form.reset();
         console.log(results);
         closeModal();
-    } /* else {
-        return false;
-    } */
+    } 
 }
 
 submit.addEventListener("click", submitForm);
