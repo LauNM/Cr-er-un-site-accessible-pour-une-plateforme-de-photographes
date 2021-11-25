@@ -56,11 +56,17 @@ export class Media {
         numberOfLikes.className = "likes";
         numberOfLikes.textContent = this._likes;
 
+        const heartWrapper = document.createElement("span");
+        heartWrapper.ariaLabel = "likes";  
+        heartWrapper.tabIndex = "0";
         const heartIcon = document.createElement("i");
+        
+        // heartIcon.role = "likes";
         heartIcon.className = "fas fa-heart click";
-        heartIcon.tabIndex = "0";
+        // heartIcon.tabIndex = "0";
 
-        heartIcon.addEventListener('click', () => {
+        heartWrapper.appendChild(heartIcon);
+        heartWrapper.addEventListener('click', () => {
             this._likes += 1;
             numberOfLikes.textContent = this._likes;
 
@@ -72,7 +78,7 @@ export class Media {
             document.querySelector("#number-total-likes").innerHTML = total;
 
         });
-        heartIcon.addEventListener('keypress', () => {
+        heartWrapper.addEventListener('keypress', () => {
             this._likes += 1;
             numberOfLikes.textContent = this._likes;
             let total = 0;
@@ -84,7 +90,7 @@ export class Media {
         });
 
         likeSection.appendChild(numberOfLikes);
-        likeSection.appendChild(heartIcon);
+        likeSection.appendChild(heartWrapper);
         return likeSection;
     }
 
