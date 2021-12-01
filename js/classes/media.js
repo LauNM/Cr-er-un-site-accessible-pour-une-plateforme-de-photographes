@@ -61,9 +61,7 @@ export class Media {
         heartWrapper.tabIndex = "0";
         const heartIcon = document.createElement("i");
         
-        // heartIcon.role = "likes";
         heartIcon.className = "fas fa-heart click";
-        // heartIcon.tabIndex = "0";
 
         heartWrapper.appendChild(heartIcon);
         heartWrapper.addEventListener('click', () => {

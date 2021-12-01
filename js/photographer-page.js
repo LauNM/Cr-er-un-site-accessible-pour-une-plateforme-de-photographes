@@ -63,6 +63,7 @@ function displayAllMedia(medias, option,idPhotographer, photographerName) {
 
 /* -------------------------------------- FETCH DATA HERE -------------------------------------------*/
 async function init() {
+    try {
     const { photographers } = await getPhotographersData();
     const { media } = await getMediaData();
 
@@ -76,5 +77,9 @@ async function init() {
 
     let option = 'likes';
     displayAllMedia(media, option, idPhotographer, photographerName)
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 init();
