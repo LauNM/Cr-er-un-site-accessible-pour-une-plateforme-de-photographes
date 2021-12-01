@@ -1,6 +1,9 @@
+import { focusInElement } from "./functions.js";
+
 const formData = document.querySelectorAll(".formData");
-const form = document.getElementById('contact-form');
+const formWindow = document.getElementById("contact-artist-form");
 const closeBtn = document.querySelector(".close");
+const form = document.getElementById('contact-form');
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
@@ -9,19 +12,20 @@ const submit = document.getElementById('submitFormBtn');
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-function closeModal() {
+focusInElement(formWindow);
+
+const closeModal = () => {
     document.getElementById('contact-artist-form').style.display = "none";
 }
 
 closeBtn.addEventListener("click", closeModal);
 window.addEventListener("keydown", function (e) {
-    console.log(e.key)
     if (e.key === 'Escape') {
         closeModal()
     }
 });
 
-function checkValidity() {
+const checkValidity = () => {
     let isValid = true;
 
     //Value.length must be > 2
@@ -51,7 +55,7 @@ function checkValidity() {
     return isValid;
 }
 
-function submitForm(event) {
+const submitForm = (event) => { 
     event.preventDefault();
     formData.forEach(el => el.setAttribute('data-error-visible', 'false'));
 

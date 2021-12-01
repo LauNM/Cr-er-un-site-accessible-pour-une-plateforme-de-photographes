@@ -1,3 +1,5 @@
+import { focusInElement } from "./functions.js";
+
 export class Lightbox {
 
     /**
@@ -15,8 +17,9 @@ export class Lightbox {
         this.index = this._tab.findIndex(media => media._id === parseInt(this._id));
         this.chooseMediaFromIndex(this.index);
 
-
         document.addEventListener('keyup', this.onKeyUp);
+        document.getElementById("lightbox__next").focus();
+        
     }
 
     /**
@@ -27,7 +30,7 @@ export class Lightbox {
 
         const mediaSelected = this._tab[index];
         const renderMedia = mediaSelected.chooseMediaType().renderLightbox();
-        this.buildMedia(renderMedia);
+        this.buildMedia(renderMedia);  
     }
 
     /**
@@ -92,34 +95,37 @@ export class Lightbox {
     buildDom () {
         const dom = document.createElement('div');
         dom.className = 'lightbox';
-
-            const buttonClose = document.createElement('button');
-            buttonClose.className = "lightbox__close";
-            const closeIcon = document.createElement('i');
-            closeIcon.className = "fas fa-times fa-3x lightbox-icon";
-            buttonClose.appendChild(closeIcon);
-
             const buttonNext = document.createElement('button');
-            buttonNext.className = "lightbox__next";
+            buttonNext.id = "lightbox__next";
+            buttonNext.ariaLabel = "next";
             const nextIcon = document.createElement('i');
             nextIcon.className = "fas fa-chevron-right fa-3x lightbox-icon";
             buttonNext.appendChild(nextIcon);
 
             const buttonPrevious = document.createElement('button');
-            buttonPrevious.className = "lightbox__previous";
+            buttonPrevious.id = "lightbox__previous";
+            buttonPrevious.ariaLabel = "previous";
             const previousIcon = document.createElement('i');
             previousIcon.className = "fas fa-chevron-left fa-3x lightbox-icon";
             buttonPrevious.appendChild(previousIcon);
+
+            const buttonClose = document.createElement('button');
+            buttonClose.id = "lightbox__close";
+            buttonClose.ariaLabel = "close";
+            const closeIcon = document.createElement('i');
+            closeIcon.className = "fas fa-times fa-3x lightbox-icon";
+            buttonClose.appendChild(closeIcon);
 
             const container = document.createElement('div');
             container.className = "lightbox__container";
             container.id = "mediaContainer";
 
-        dom.appendChild(buttonClose);
         dom.appendChild(buttonNext);
         dom.appendChild(buttonPrevious);
+        dom.appendChild(buttonClose);
         dom.appendChild(container);
 
+        focusInElement(dom)
         buttonClose.addEventListener('click', this.close.bind(this))
         buttonNext.addEventListener('click', this.next.bind(this))
         buttonPrevious.addEventListener('click', this.previous.bind(this))

@@ -1,7 +1,5 @@
 import { infoList, createLinksTag, displayAllFilteredMedia } from "../functions.js";
 
-
-
 export class Artist {
     constructor(id, portrait, name, city, country, tagline, price, tags) {
         this._id = id;
@@ -140,8 +138,8 @@ export class Artist {
         contactBtn.textContent = "Contactez-moi";
         contactBtn.addEventListener('click', () => {
             document.getElementById('contact-artist-form').style.display = "block";
+            document.getElementById("first").focus();
         })
-
         contactSection.appendChild(contactBtn);
         return contactSection;
     }

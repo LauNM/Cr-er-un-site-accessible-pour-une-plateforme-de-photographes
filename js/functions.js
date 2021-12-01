@@ -71,19 +71,19 @@ export const filterDataByTag = (data, tag) => {
 
 // FUNCTION TO SORT DATA 
 
-function sortByPopularity(data) {
+const sortByPopularity = (data) => {
     data.sort((a, b) => {
         return a.likes - b.likes;
     });
 }
-function sortByDate(data) {
+const sortByDate = (data) => {
     data.sort((a, b) => {
         let da = new Date(a.date),
             db = new Date(b.date);
         return da - db;
     });
 }
-function sortByTitle(data) {
+const sortByTitle = (data) => {
     data.sort((a, b) => {
         let fa = a.title.toLowerCase(),
             fb = b.title.toLowerCase();
@@ -127,5 +127,23 @@ export const calculeTotalOfLikes = (data) => {
     return total;
 }
 
-
-
+export const focusInElement = (place) => {
+    const focusableEls = place.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), input[type="submit"]:not([disabled]), select:not([disabled])');
+    const firstFocusableEl = focusableEls[0];  
+    const lastFocusableEl = focusableEls[focusableEls.length - 1];
+    place.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+          if ( e.shiftKey )  {
+            if (document.activeElement === firstFocusableEl) {
+              lastFocusableEl.focus();
+              e.preventDefault();
+            }
+          } else  {
+            if (document.activeElement === lastFocusableEl) {
+              firstFocusableEl.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      });
+}

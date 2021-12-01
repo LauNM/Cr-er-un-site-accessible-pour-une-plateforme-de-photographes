@@ -1,7 +1,7 @@
 import { filterDataByTag, createTagsList } from "./functions.js";
 import { getPhotographersData } from "./data.js";
 
-function displayGoTo() {
+const displayGoTo = () => {
     let y = window.scrollY;
     if (y < 50) {
         goToContent.className = "hide"

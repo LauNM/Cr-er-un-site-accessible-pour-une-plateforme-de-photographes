@@ -13,7 +13,7 @@ const priceSection = document.getElementById("day-price");
 const numberTotalLikes = document.getElementById("number-total-likes");
 
 
-function displayStaticContent(data) {
+const displayStaticContent = (data) => {
     const artist = new Artist(
         data.id, 
         data.portrait, 
@@ -32,7 +32,7 @@ function displayStaticContent(data) {
 
 
 
-function renderMedia(data, photographerName) {
+const renderMedia = (data, photographerName) => {
     const media = new Media(
         data.id, 
         data.photographerId, 
@@ -49,7 +49,7 @@ function renderMedia(data, photographerName) {
     return media;
 }
 
-function displayAllMedia(medias, option,idPhotographer, photographerName) {
+const displayAllMedia = (medias, option,idPhotographer, photographerName) => {
     mediaSection.innerHTML = '';
     const filteredMedia = medias.filter(item => item.photographerId === idPhotographer);
     sortBy(filteredMedia, option);

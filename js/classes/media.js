@@ -132,9 +132,8 @@ export class Media {
     }
 }
 
-class Image extends Media {
+class Image {
     constructor(id, photographerName, image, altText) {
-        super()
         this._id = id;
         this._photographerName = photographerName;
         this._image = image;
@@ -153,10 +152,12 @@ class Image extends Media {
         image.addEventListener('click', () => {
 
             new Lightbox(infoList, this._id)
+            // document.getElementsByClassName("lightbox__next").focus();
         })
         image.addEventListener('keypress', () => {
 
             new Lightbox(infoList, this._id)
+            // document.getElementsByClassName("lightbox__next").focus();
         })
         return image;
     }
@@ -182,9 +183,8 @@ class Image extends Media {
     }
 }
 
-class Video extends Media {
+class Video {
     constructor(id, photographerName, video, altText) {
-        super()
         this._id = id;
         this._photographerName = photographerName;
         this._video = video;
@@ -203,6 +203,10 @@ class Video extends Media {
         video.appendChild(source);
 
         video.addEventListener('click', () => {
+            new Lightbox(infoList, this._id)
+        })
+        video.addEventListener('keypress', () => {
+
             new Lightbox(infoList, this._id)
         })
         return video;
